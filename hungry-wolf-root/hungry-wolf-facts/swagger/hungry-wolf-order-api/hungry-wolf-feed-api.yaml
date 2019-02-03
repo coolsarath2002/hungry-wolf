@@ -1,0 +1,124 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Hungry Wolf feed API
+  description: Hungry Wolf feed API
+  termsOfService: https://www.hungryWolf.com/terms-conditions/
+host: api.feed.hungrywolf.com
+basePath: /
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  APISecurity:
+    type: basic
+
+security:
+  - APISecurity: []
+
+paths:
+  '/meals/zipcode/{zipcode}':
+    get:
+      tags:
+        - Meals
+      description: Meals controller
+      operationId: getMealsByZipCode
+      produces:
+        - application/json
+      parameters:
+        - name: path
+          in: zipcode
+          description: zipcode details for fetching the meal.
+          required: true
+          type: string   
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Meals'
+            
+  '/meals/tag/{tag}':
+    get:
+      tags:
+        - Meals
+      description: Meals controller
+      operationId: getMealsByTags
+      produces:
+        - application/json
+      parameters:
+        - name: path
+          in: tag
+          description: tag details for fetching the meal.
+          required: true
+          type: string   
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Meals'
+  '/meals/status/{status}':
+    get:
+      tags:
+        - Meals
+      description: Meals by status 
+      operationId: getMealsByStatus
+      produces:
+        - application/json
+      parameters:
+        - name: path
+          in: tag
+          description: tag details for fetching the meal.
+          required: true
+          type: string   
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Meals'    
+                               
+definitions:
+
+   Meals:
+       type: object
+       properties:
+         mealList:
+           type: array
+           items:
+             $ref: '#/definitions/Meal'
+   Meal:
+      type: object
+      properties:
+         summary:
+           type: string
+         token:
+           type: string
+         orderClosedBy:
+           type: string
+           format: date-time
+         createdDate:
+           type: string
+           format: date-time
+         currencyEquivalent:
+           type: number
+           format: int32
+         meal_header:
+            type: string
+         estimatedDelivery:
+            type: string
+            format: date-time
+         tags:
+            type: string
+         mealsLeft: 
+            type: string
+         mealsAvailable:           
+            type: string
+         source:
+            type: string
+         pickup_info:
+            type: string
+         additionalInfo:
+            type: string      
+ 

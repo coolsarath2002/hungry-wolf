@@ -1,0 +1,11 @@
+/.metadata/
+*.class
+.project,.prefs,.classpath
+*.project
+*.classpath
+*.prefs
+hungry-wolf-root/hungry-wolf-facts/swagger/**/*.java
+hungry-wolf-root/**/target/
+hungry-wolf-root/hungry-wolf-facts/swagger/hungry-wolf-feed-api/generated/**
+hungry-wolf-root/hungry-wolf-facts/swagger/**/generated
+hungry-wolf-root/**/bin

@@ -20,105 +20,167 @@ security:
   - APISecurity: []
 
 paths:
-  '/meals/zipcode/{zipcode}':
+  '/orders/user/{id}':
     get:
       tags:
-        - Meals
-      description: Meals controller
-      operationId: getMealsByZipCode
+        - Order
+      description: Orders controller
+      operationId: getOrdersByUserId
       produces:
         - application/json
       parameters:
-        - name: path
-          in: zipcode
-          description: zipcode details for fetching the meal.
+        - name: id
+          in: path
+          description: user id detail for fetching the orders
           required: true
-          type: string   
+          type: string
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Meals'
+            $ref: '#/definitions/Orders'
             
-  '/meals/tag/{tag}':
+  '/order/{id}':
     get:
       tags:
-        - Meals
-      description: Meals controller
-      operationId: getMealsByTags
+        - Order
+      description: Orders controller
+      operationId: getOrderById
       produces:
         - application/json
       parameters:
-        - name: path
-          in: tag
-          description: tag details for fetching the meal.
+        - name: id
+          in: path
+          description: id for fetching the order
           required: true
-          type: string   
+          type: string
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Meals'
-  '/meals/status/{status}':
-    get:
+            $ref: '#/definitions/Order'
+            
+  '/order':
+    post:
       tags:
-        - Meals
-      description: Meals by status 
-      operationId: getMealsByStatus
+        - Order
+      description: Orders Controller
+      operationId: createOrder
       produces:
         - application/json
       parameters:
-        - name: path
-          in: tag
-          description: tag details for fetching the meal.
+        - name: order
+          in: header
+          description: order object for storing
           required: true
-          type: string   
+          schema:
+            $ref: '#definitions/Order'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Meals'    
-                               
+            $ref: '#/definitions/Order'
+            
+  '/order/{id}':
+    put:
+      tags:
+        - Order
+      description: Orders Controller
+      operationId: updateOrder
+      produces:
+        - application/json
+      parameters:
+        - name: order
+          in: header
+          description: order object for updating
+          required: true
+          schema:
+            $ref: '#definitions/Order'
+        - name: id
+          in: path
+          description: id of an order
+          required: true
+          type: string
+      
+  '/order/{orderId}/orderItem/{id}':
+    put:
+      tags:
+        - Order
+      description: Orders Controller
+      operationId: updateOrder
+      produces:
+        - application/json
+      parameters:
+        - name: orderId
+          in: path 
+          description: orderId to be updated
+          required: true
+          type: string
+        - name: orderItem
+          in: header
+          description: orderItem to be added
+          required: true
+          schema:
+            $ref: '#definitions/OrderItem
+                    
+  '/orderItem/{id}':
+    put:
+      tags:
+        - OrderItem
+      description: Orders Controller
+      operationId: updateOrderItem
+      produces:
+        - application/json
+      parameters:
+        - name: orderItemId
+          in: path
+          description: orderItem id to be updated
+          required: true
+          type: string
+        - name: orderItem
+          in: header
+          description: orderItem  to be updated
+          required: true
+          schema:
+            $ref: '#definitions/OrderItem      
+  
 definitions:
 
-   Meals:
-       type: object
-       properties:
-         mealList:
-           type: array
-           items:
-             $ref: '#/definitions/Meal'
-   Meal:
+  Orders:
       type: object
       properties:
-         summary:
-           type: string
-         token:
-           type: string
-         orderClosedBy:
-           type: string
-           format: date-time
-         createdDate:
-           type: string
-           format: date-time
-         currencyEquivalent:
-           type: number
-           format: int32
-         meal_header:
-            type: string
-         estimatedDelivery:
-            type: string
-            format: date-time
-         tags:
-            type: string
-         mealsLeft: 
-            type: string
-         mealsAvailable:           
-            type: string
-         source:
-            type: string
-         pickup_info:
-            type: string
-         additionalInfo:
-            type: string      
- 
+        orderList:
+          type: array
+          items:
+            $ref: '#/definitions/Order'
+      
+  Order:
+      type: object
+      properties:
+        orderId:
+          type: string
+        accountId:
+          type: string
+        tokenSpent:
+          type: string
+        orderItems:
+          type: array
+          items:
+            $ref: '#/definitions/OrderItem'
+     
+  OrderItem:
+      type: object
+      properties:
+        orderId:
+          type: string
+        mealId:
+          type: string
+        quantity:
+          type: integer
+        notes:
+          type: String
+        tokenSpend:
+          type: string
+        id:
+          type: string
+          

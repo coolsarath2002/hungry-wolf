@@ -18,7 +18,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\tmeal:{\n\t\t\"id\": \"1231345345\"\n\t\t\"title\" : \"Chicken non-veg meals\",\n\t\t\"img\" : \"https://api.feed.com/static/chicken_south_menu.png\",\n\t\t\"date\" : \"2018-12-24\",\n\t\t\"tags\" : {\n\t\t\t\"#chicken\",\n\t\t\t\"#homemade\",\n\t\t\t\"#south style\",\n\t\t\t\"#meals\",\n\t\t\t\"#momtaste\"\n\t\t},\n\t\t\"creator\" : {\n\t\t\t\"id\" : \"saywhatme\",\n\t\t\t\"rating\" : {\n\t\t\t\t\"overall\" : \"3.25\",\n\t\t\t\t\"details\" {\n\t\t\t\t\t\"quality\" : \"2.1\",\n\t\t\t\t\t\"delivery\" : \"3.5\",\n\t\t\t\t\t\"quantity\": \"4\",\n\t\t\t\t\t\"taste\": \"3.5\",\n\t\t\t\t\t\"misc\" : \"2.75\"\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}"
+							"raw": "[{\n\t\t\"id\": \"1231345345\",\n\t\t\"title\": \"Chicken non-veg meals\",\n\t\t\"img\": \"https://api.feed.com/static/chicken_south_menu.png\",\n\t\t\"date\": \"2018-12-24\",\n\t\t\"creator\": {\n\t\t\t\"id\": \"908534312\",\n\t\t\t\"avatar\": \"https://api.feed.com/profile/908534312_avatar.png\",\n\t\t\t\"rating\": {\n\t\t\t\t\"overall\": \"3.25\",\n\t\t\t\t\"details\": {\n\t\t\t\t\t\"quality\": \"2.1\",\n\t\t\t\t\t\"delivery\": \"3.5\",\n\t\t\t\t\t\"quantity\": \"4\",\n\t\t\t\t\t\"taste\": \"3.5\",\n\t\t\t\t\t\"misc\": \"2.75\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"tags\": [\n\t\t\t\t\"#chicken\",\n\t\t\t\t\"#homemade\",\n\t\t\t\t\"#south style\",\n\t\t\t\t\"#meals\",\n\t\t\t\t\"#momtaste\"\n\t\t\t]\n\t\t}\n\t},\n\t{\n\t\t\"id\": \"12313453423\",\n\t\t\"title\": \"Chicken non-veg meals\",\n\t\t\"img\": \"https://api.feed.com/static/chicken_south_menu.png\",\n\t\t\"date\": \"2018-12-24\",\n\t\t\"creator\": {\n\t\t\t\"id\": \"9085343\",\n\t\t\t\"rating\": {\n\t\t\t\t\"overall\": \"3.25\",\n\t\t\t\t\"details\": {\n\t\t\t\t\t\"quality\": \"2.1\",\n\t\t\t\t\t\"delivery\": \"3.5\",\n\t\t\t\t\t\"quantity\": \"4\",\n\t\t\t\t\t\"taste\": \"3.5\",\n\t\t\t\t\t\"misc\": \"2.75\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"tags\": [\n\t\t\t\t\"#chicken\",\n\t\t\t\t\"#homemade\",\n\t\t\t\t\"#south style\",\n\t\t\t\t\"#meals\",\n\t\t\t\t\"#momtaste\"\n\t\t\t]\n\t\t}\n\t}\n\n]"
 						},
 						"url": {
 							"raw": "{feed_server}/customer/meals",
@@ -40,7 +40,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\tsearchBy : [{\n\t\t\"#southindian\", \"#biriyani\"\n\t}]\n\tsortBy : [{\n\t\t\"price\",\"nearest\"\n\t}]\n}"
+							"raw": "{\n\t\"searchBy\": [\n\t\t\"#southindian\",\n\t\t\"#biriyani\"\n\t],\n\t\"sortBy\": [\n\t\t\"price\",\n\t\t\"nearest\"\n\t]\n}"
 						},
 						"url": {
 							"raw": "{feed_server}/customer/meals",
@@ -65,7 +65,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\tmeal:{\n\t\t\"id\": \"1231345345\"\n\t\t\"title\" : \"Chicken non-veg meals\",\n\t\t\"img\" : \"https://api.feed.com/static/chicken_south_menu.png\",\n\t\t\"date\" : \"2018\"\n\t\t\"tags\" : {\n\t\t\t\"#chicken\",\n\t\t\t\"#homemade\",\n\t\t\t\"#south style\",\n\t\t\t\"#meals\",\n\t\t\t\"#momtaste\"\n\t\t},\n\t\t\"order_instructions\":{\n\t\t\t\"available\" : \"4\",\n\t\t\t\"time_left\" : \"180 mins\",\n\t\t\t\"deadline\"  : \"12-24-2018T13:00:00\",\n\t\t\t\"time_zone\" : \"PST\"\n\t\t},\n\t\t\"details\":{\n\t\t\t\"menuItems\" :[{\n\t\t\t\t{\n\t\t\t\t\t\"item_id\" : \"0909098\",\n\t\t\t\t\t\"desc\" : \" white rice\",\n\t\t\t\t\t\"dishtype\" :\"carbs\",\n\t\t\t\t\t\"measurement\" : \"1 cup\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"item_id\" : \"0909093\",\n\t\t\t\t\t\"desc\" : \"lenthils sambar\",\n\t\t\t\t\t\"dishtype\" :\"gravy\",\n\t\t\t\t\t\"measurement\" : \"30 ml\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"item_id\" : \"0909088\",\n\t\t\t\t\t\"desc\" : \"tomato rasam\",\n\t\t\t\t\t\"dishtype\" :\"gravy\",\n\t\t\t\t\t\"measurement\" : \"30 ml\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"item_id\" : \"0909098\",\n\t\t\t\t\t\"desc\" : \"curd\",\n\t\t\t\t\t\"dishtype\" : \" side\",\n\t\t\t\t\t\"measurement\" : \"1 cup\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"item_id\" : \"09229098\",\n\t\t\t\t\t\"desc\" : \"potato fry\",\n\t\t\t\t\t\"dishtype\" : \" side\",\n\t\t\t\t\t\"measurement\" : \"1/2 cup\",\n\t\t\t\t}\n\t\t\t}]\n\t\t}\n\t\t\"creator\" : {\n\t\t\t\"id\" : \"saywhatme\",\n\t\t\t\"avatar\" \" : \"https://api.feed.com/customer/static/saywhatme.avatar.png\"\n\t\t\t\"rating\" : {\n\t\t\t\t\"overall\" : \"3.25\",\n\t\t\t\t\"details\" {\n\t\t\t\t\t\"quality\" : \"2.1\",\n\t\t\t\t\t\"delivery\" : \"3.5\",\n\t\t\t\t\t\"quantity\": \"4\",\n\t\t\t\t\t\"taste\": \"3.5\",\n\t\t\t\t\t\"misc\" : \"2.75\"\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t\t\"delivery_instructions\": {\n\t\t\t\"type\":\"pick-up\",\n\t\t\t\"zipcode\":\"98765\",\n\t\t\t\"geometry\" : {\n            \"location\" : {\n               \"lat\" : 37.4224764,\n               \"lng\" : -122.0842499\n            }\n\t\t}\n\t\t\"pricing\":{\n\t\t\t\"type\" : \"customer\",\n\t\t\trates :[\n\t\t\t\t{\n\t\t\t\t\t\"rate_cd\" : \"COOKCSERV\",\n\t\t\t\t\t\"rate\" : \"89\",\n\t\t\t\t\t\"currency\" : \"ruppee\",\n\t\t\t\t\t\"rate_type\" : \"FLAT\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t}\n}"
+							"raw": "{\n\t\"id\": \"1231345345\",\n\t\"title\": \"Chicken non-veg meals\",\n\t\"img\": \"https://api.feed.com/static/chicken_south_menu.png\",\n\t\"date\": \"24-09-2018\",\n\t\"tags\": [\n\t\t\"#chicken\",\n\t\t\"#homemade\",\n\t\t\"#south style\",\n\t\t\"#meals\",\n\t\t\"#momtaste\"\n\t],\n\t\"order_instructions\": {\n\t\t\"available\": \"4\",\n\t\t\"time_left\": \"180 mins\",\n\t\t\"deadline\": \"12-24-2018T13:00:00\",\n\t\t\"time_zone\": \"PST\"\n\t},\n\t\"details\": {\n\t\t\"menuItems\": [{\n\t\t\t\t\"item_id\": \"0909098\",\n\t\t\t\t\"desc\": \" white rice\",\n\t\t\t\t\"dishtype\": \"carbs\",\n\t\t\t\t\"measurement\": \"1 cup\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"item_id\": \"0909093\",\n\t\t\t\t\"desc\": \"lenthils sambar\",\n\t\t\t\t\"dishtype\": \"gravy\",\n\t\t\t\t\"measurement\": \"30 ml\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"item_id\": \"0909088\",\n\t\t\t\t\"desc\": \"tomato rasam\",\n\t\t\t\t\"dishtype\": \"gravy\",\n\t\t\t\t\"measurement\": \"30 ml\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"item_id\": \"0909098\",\n\t\t\t\t\"desc\": \"curd\",\n\t\t\t\t\"dishtype\": \" side\",\n\t\t\t\t\"measurement\": \"1 cup\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"item_id\": \"09229098\",\n\t\t\t\t\"desc\": \"potato fry\",\n\t\t\t\t\"dishtype\": \" side\",\n\t\t\t\t\"measurement\": \"1/2 cup\"\n\t\t\t}\n\t\t]\n\t},\n\t\"creator\": {\n\t\t\"id\": \"saywhatme\",\n\t\t\"avatar\": \"https://api.feed.com/customer/static/saywhatme.avatar.png\",\n\t\t\"rating\": {\n\t\t\t\"overall\": \"3.25\",\n\t\t\t\"details\": {\n\t\t\t\t\"quality\": \"2.1\",\n\t\t\t\t\"delivery\": \"3.5\",\n\t\t\t\t\"quantity\": \"4\",\n\t\t\t\t\"taste\": \"3.5\",\n\t\t\t\t\"misc\": \"2.75\"\n\t\t\t}\n\t\t}\n\t},\n\t\"delivery_instructions\": {\n\t\t\"type\": \"pick-up\",\n\t\t\"zipcode\": \"98765\",\n\t\t\"geometry\": {\n\t\t\t\"location\": {\n\t\t\t\t\"lat\": 37.4224764,\n\t\t\t\t\"lng\": -122.0842499\n\t\t\t}\n\t\t},\n\t\t\"pricing\": {\n\t\t\t\"type\": \"customer\",\n\t\t\t\"rates\": [{\n\t\t\t\t\"rate_cd\": \"COOKCSERV\",\n\t\t\t\t\"rate\": \"89\",\n\t\t\t\t\"currency\": \"ruppee\",\n\t\t\t\t\"rate_type\": \"FLAT\"\n\t\t\t}]\n\t\t}\n\t}\n}"
 						},
 						"url": {
 							"raw": "{feed_server}/customer/meal/{id}",
@@ -91,7 +91,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"menu_id\":\"12312423424\",\n\t\"details\" :\"[\n\t\t{\n\t\t\t\"item_id\" : \"0909098\",\n\t\t\t\"desc\" : \" white rice\",\n\t\t\t\"dishtype\" :\"carbs\",\n\t\t\t\"measurement\" : \"1 cup\",\n\t\t},\n\t\t{\n\t\t\t\"item_id\" : \"0909093\",\n\t\t\t\"desc\" : \"lenthils sambar\",\n\t\t\t\"dishtype\" :\"gravy\",\n\t\t\t\"measurement\" : \"30 ml\",\n\t\t},\n\t\t{\n\t\t\t\"item_id\" : \"0909088\",\n\t\t\t\"desc\" : \"tomato rasam\",\n\t\t\t\"dishtype\" :\"gravy\",\n\t\t\t\"measurement\" : \"30 ml\",\n\t\t},\n\t\t{\n\t\t\t\"item_id\" : \"0909098\",\n\t\t\t\"desc\" : \"curd\",\n\t\t\t\"dishtype\" : \" side\",\n\t\t\t\"measurement\" : \"1 cup\",\n\t\t},\n\t\t{\n\t\t\t\"item_id\" : \"09229098\",\n\t\t\t\"desc\" : \"potato fry\",\n\t\t\t\"dishtype\" : \" side\",\n\t\t\t\"measurement\" : \"1/2 cup\",\n\t\t}\n\t]\"\n}\n"
+							"raw": "[\n\t{\n\t\t\"item_id\": \"0909098\",\n\t\t\"desc\": \" white rice\",\n\t\t\"dishtype\": \"carbs\",\n\t\t\"measurement\": \"1 cup\"\n\t},\n\t{\n\t\t\"item_id\": \"0909093\",\n\t\t\"desc\": \"lenthils sambar\",\n\t\t\"dishtype\": \"gravy\",\n\t\t\"measurement\": \"30 ml\"\n\t},\n\t{\n\t\t\"item_id\": \"0909088\",\n\t\t\"desc\": \"tomato rasam\",\n\t\t\"dishtype\": \"gravy\",\n\t\t\"measurement\": \"30 ml\"\n\t},\n\t{\n\t\t\"item_id\": \"0909098\",\n\t\t\"desc\": \"curd\",\n\t\t\"dishtype\": \" side\",\n\t\t\"measurement\": \"1 cup\"\n\t},\n\t{\n\t\t\"item_id\": \"09229098\",\n\t\t\"desc\": \"potato fry\",\n\t\t\"dishtype\": \" side\",\n\t\t\"measurement\": \"1/2 cup\"\n\t}\n]"
 						},
 						"url": {
 							"raw": "{feed_server}/customer/meal/{id}/summary",
@@ -146,7 +146,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"type\":\"pick-up\",\n\t\"zipcode\":\"98765\",\n\t\"geometry\" : {\n        \"location\" : {\n           \"lat\" : 37.4224764,\n           \"lng\" : -122.0842499\n        }\n\t}\n}"
+							"raw": "{\n\t\t\"type\": \"pick-up\",\n\t\t\"zipcode\": \"98765\",\n\t\t\"geometry\": {\n\t\t\t\"location\": {\n\t\t\t\t\"lat\": 37.4224764,\n\t\t\t\t\"lng\": -122.0842499\n\t\t\t}\n\t\t}\n}"
 						},
 						"url": {
 							"raw": "{feed_server}/customer/meal/{id}/order/instruction",
@@ -213,6 +213,31 @@
 								"meal",
 								"{id}",
 								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{feed_server}/customer/meals",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\n\t\t\"id\": \"1231345345\",\n\t\t\"title\": \"Chicken non-veg meals\",\n\t\t\"img\": \"https://api.feed.com/static/chicken_south_menu.png\",\n\t\t\"date\": \"2018-12-24\",\n\t\t\"creator\": {\n\t\t\t\"id\": \"908534312\",\n\t\t\t\"avatar\": \"https://api.feed.com/profile/908534312_avatar.png\",\n\t\t\t\"rating\": {\n\t\t\t\t\"overall\": \"3.25\",\n\t\t\t\t\"details\": {\n\t\t\t\t\t\"quality\": \"2.1\",\n\t\t\t\t\t\"delivery\": \"3.5\",\n\t\t\t\t\t\"quantity\": \"4\",\n\t\t\t\t\t\"taste\": \"3.5\",\n\t\t\t\t\t\"misc\": \"2.75\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"tags\": [\n\t\t\t\t\"#chicken\",\n\t\t\t\t\"#homemade\",\n\t\t\t\t\"#south style\",\n\t\t\t\t\"#meals\",\n\t\t\t\t\"#momtaste\"\n\t\t\t]\n\t\t}\n\t},\n\t{\n\t\t\"id\": \"12313453423\",\n\t\t\"title\": \"Chicken non-veg meals\",\n\t\t\"img\": \"https://api.feed.com/static/chicken_south_menu.png\",\n\t\t\"date\": \"2018-12-24\",\n\t\t\"creator\": {\n\t\t\t\"id\": \"9085343\",\n\t\t\t\"rating\": {\n\t\t\t\t\"overall\": \"3.25\",\n\t\t\t\t\"details\": {\n\t\t\t\t\t\"quality\": \"2.1\",\n\t\t\t\t\t\"delivery\": \"3.5\",\n\t\t\t\t\t\"quantity\": \"4\",\n\t\t\t\t\t\"taste\": \"3.5\",\n\t\t\t\t\t\"misc\": \"2.75\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"tags\": [\n\t\t\t\t\"#chicken\",\n\t\t\t\t\"#homemade\",\n\t\t\t\t\"#south style\",\n\t\t\t\t\"#meals\",\n\t\t\t\t\"#momtaste\"\n\t\t\t]\n\t\t}\n\t}\n\n]"
+						},
+						"url": {
+							"raw": "{feed_server}/customer/meals",
+							"host": [
+								"{feed_server}"
+							],
+							"path": [
+								"customer",
+								"meals"
 							]
 						}
 					},

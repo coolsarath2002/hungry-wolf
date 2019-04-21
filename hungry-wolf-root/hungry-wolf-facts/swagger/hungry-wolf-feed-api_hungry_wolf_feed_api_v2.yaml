@@ -108,6 +108,78 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/errorModel'
+  
+  /customer/meals/details/serving/{id}:
+    get:
+      tags:
+        - Today meals
+      description: Get Today meals
+      operationId: getMealsServingDetails
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/MealServing'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+  
+  /customer/meals/details/delivery/{id}:
+    get:
+      tags:
+        - Today meals
+      description: Get Today meals
+      operationId: getMealsDeliveryDetails
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/MealDelivery'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel' 
+  
+  /customer/meals/details/payment/{id}:
+    get:
+      tags:
+        - Today meals
+      description: Get Today meals
+      operationId: getMealsPricingInfo
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/PricingInfos'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'           
             
 definitions:
   Meals:

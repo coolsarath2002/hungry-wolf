@@ -1,0 +1,343 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Hungry Wolf feed API
+  description: Hungry Wolf feed API
+  termsOfService: https://www.hungryWolf.com/terms-conditions/
+host: api.feed.hungrywolf.com
+basePath: /
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  APISecurity:
+    type: basic
+
+security:
+  - APISecurity: []
+
+paths:
+  /customer/meals:
+    get:
+      tags:
+        - Today meals
+      description: Get Today meals
+      operationId: getTodayMeals
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/Meals'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+    post:
+      tags:
+        - Today meals
+      description: Get Today meals
+      operationId: getTodaysMealsByTags
+      produces:
+        - application/json
+      parameters:
+        - name: request
+          in: body
+          description: Meals List
+          required: true
+          schema:
+            $ref: '#/definitions/MealsSearch'
+      responses:
+        '200':
+          description: New Service Creation Response
+          schema:
+            $ref: '#/definitions/Meals'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+  /customer/meals/{id}:
+    get:
+      tags:
+        - Today meals
+      description: Get Today meals
+      operationId: getTodayMealsById
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/Meals'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+  
+  /customer/meals/details/{id}:
+    get:
+      tags:
+        - Today meals
+      description: Get Today meals
+      operationId: getMealsDetails
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/MealDetails'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+            
+definitions:
+  Meals:
+    type: object
+    properties:
+      mealList:
+        type: array
+        items:
+          $ref: '#/definitions/Meal'
+          
+  MealDetails:
+    type: object
+    properties:
+      meal:
+        type: object
+        items:
+          $ref: '#/definitions/Meal'
+      mealSummary:    
+        type: object
+        items:
+          $ref: '#/definitions/MealSummary'
+      mealServing:
+        type: object
+        items:
+          $ref: '#/definitions/MealServing'
+      mealDelivery:
+        type: object
+        items:
+          $ref: '#/definitions/MealDelivery'
+      pricing:
+        type: object
+        items:
+          $ref: '#/definitions/PricingInfo'  
+  
+  PricingInfos:
+    type: object
+    properties:
+      pricingType:
+        type: string
+        format: string
+        description: delivery type
+        example: pickup, delivery 
+      pricingInfo:
+        $ref: '#/definitions/PricingInfo'   
+  
+  PricingInfo:
+    type: object
+    properties:
+      rateCd:
+        type: string
+        format: string
+      rate:
+        type: string
+        format: string
+      currency:
+        type: string
+        format: string
+      rateType:
+        type: string
+        format: string
+        
+  Meal:
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+        description: asdfasd
+        example: adadas
+      image:
+        type: string
+        description: url for the meal
+        example: 001
+      mealDate:
+        type: string
+        format: date-time
+        description: Meal Start Date
+        example: 2018-06-22T00:00:00.000Z  
+      creator:
+        $ref: '#/definitions/Creator'
+      tags:
+        $ref: '#/definitions/MealTags'
+  
+  MealsSearch:
+    type: object
+    properties:
+      search:
+        $ref: '#/definitions/SearchCriteria'  
+  
+  MealTags:
+    type: object
+    properties:
+      tags:
+        type: array
+        items:
+          format: string
+  
+  SearchCriteria:
+    type: object
+    properties:
+      searchBy:
+        type: array
+        items:
+          format: string
+      sortBy:
+        type: array
+        items:
+          format: string
+  Creator:    
+    type: object
+    properties:
+      id:
+        type: string
+      avatar:
+        type: string
+      rating:
+        $ref: '#/definitions/Rating'
+        
+      
+  Rating:
+    type: object
+    properties:
+      overall:
+        type: number
+        format: int32
+      detail:
+        $ref: '#/definitions/RatingDetails'  
+  
+  RatingDetails:
+    type: object
+    properties:
+      quality:
+        type: number
+        format: int32
+        description: amount 
+        example: 15.25 
+      delivery:
+        type: number
+        format: int32
+        description: amount 
+        example: 15.25 
+      quantity:
+        type: number
+        format: int32
+        description: amount 
+        example: 15.25 
+      taste:
+        type: number
+        format: int32
+        description: amount 
+        example: 15.25 
+      packing:
+        type: number
+        format: int32
+        description: amount 
+        example: 15.25  
+      misc:
+        type: number
+        format: int32
+        description: amount 
+        example: 15.25
+  
+  MealSummary:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/MealItems' 
+          
+  MealServing:
+    type: object
+    properties:
+      available:
+        type: number
+        format: int32
+        description: amount 
+        example: 15.25
+      timeLeft:
+        type: string
+        format: string
+        description: time in mins 
+        example: 15.25
+      mealDate:
+        type: string
+        format: date-time
+        description: Meal Order deadline Date
+        example: 2018-06-22T00:00:00.000Z 
+  
+  
+  MealDelivery:
+    type: object
+    properties:
+      deliveryType:
+        type: string
+        format: string
+        description: delivery type
+        example: pickup, delivery 
+      mealDate:
+        type: string
+        format: date-time
+        description: Meal Order deadline Date
+        example: 2018-06-22T00:00:00.000Z       
+  
+  MealItems:
+    type: object
+    properties:
+      itemId:
+        type: string
+        description:  sdfsdf
+      desc:
+        type: string
+        description: meal item desc
+      dishType:
+        type: string
+        description: gravy/sauce
+      measurement:
+        type: string
+        description: serving measurement
+        
+  errorModel:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        example: 500
+      message:
+        type: string
+        example: Illegal Argument Exception

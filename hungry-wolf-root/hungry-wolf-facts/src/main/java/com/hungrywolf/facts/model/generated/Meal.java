@@ -3,10 +3,13 @@ package com.hungrywolf.facts.model.generated;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.hungrywolf.facts.model.generated.Chef;
+import com.hungrywolf.facts.model.generated.MealTags;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
+
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -15,193 +18,130 @@ import javax.validation.constraints.*;
  * Meal
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-02-02T14:29:23.639-08:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-11-03T01:23:28.090-07:00")
 
 public class Meal   {
-  @JsonProperty("summary")
-  private String summary = null;
+  @JsonProperty("id")
+  private Integer id = null;
 
-  @JsonProperty("token")
-  private String token = null;
+  @JsonProperty("title")
+  private String title = null;
 
-  @JsonProperty("orderClosedBy")
-  private ZonedDateTime orderClosedBy = null;
+  @JsonProperty("image")
+  private String image = null;
 
-  @JsonProperty("createdDate")
-  private ZonedDateTime createdDate = null;
+  @JsonProperty("mealDate")
+  private ZonedDateTime mealDate = null;
 
-  @JsonProperty("currencyEquivalent")
-  private BigDecimal currencyEquivalent = null;
-
-  @JsonProperty("meal_header")
-  private String mealHeader = null;
-
-  @JsonProperty("estimatedDelivery")
-  private ZonedDateTime estimatedDelivery = null;
+  @JsonProperty("chef")
+  private Chef chef = null;
 
   @JsonProperty("tags")
-  private String tags = null;
+  private MealTags tags = null;
 
-  @JsonProperty("mealsLeft")
-  private String mealsLeft = null;
-
-  @JsonProperty("mealsAvailable")
-  private String mealsAvailable = null;
-
-  @JsonProperty("source")
-  private String source = null;
-
-  @JsonProperty("pickup_info")
-  private String pickupInfo = null;
-
-  @JsonProperty("additionalInfo")
-  private String additionalInfo = null;
-
-  public Meal summary(String summary) {
-    this.summary = summary;
+  public Meal id(Integer id) {
+    this.id = id;
     return this;
   }
 
   /**
-   * Get summary
-   * @return summary
+   * Get id
+   * @return id
   **/
   @ApiModelProperty(value = "")
 
 
-  public String getSummary() {
-    return summary;
+  public Integer getId() {
+    return id;
   }
 
-  public void setSummary(String summary) {
-    this.summary = summary;
+  public void setId(Integer id) {
+    this.id = id;
   }
 
-  public Meal token(String token) {
-    this.token = token;
+  public Meal title(String title) {
+    this.title = title;
     return this;
   }
 
   /**
-   * Get token
-   * @return token
+   * asdfasd
+   * @return title
   **/
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "adadas", value = "asdfasd")
 
 
-  public String getToken() {
-    return token;
+  public String getTitle() {
+    return title;
   }
 
-  public void setToken(String token) {
-    this.token = token;
+  public void setTitle(String title) {
+    this.title = title;
   }
 
-  public Meal orderClosedBy(ZonedDateTime orderClosedBy) {
-    this.orderClosedBy = orderClosedBy;
+  public Meal image(String image) {
+    this.image = image;
     return this;
   }
 
   /**
-   * Get orderClosedBy
-   * @return orderClosedBy
+   * url for the meal
+   * @return image
+  **/
+  @ApiModelProperty(example = "1", value = "url for the meal")
+
+
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
+  }
+
+  public Meal mealDate(ZonedDateTime mealDate) {
+    this.mealDate = mealDate;
+    return this;
+  }
+
+  /**
+   * Meal Start Date
+   * @return mealDate
+  **/
+  @ApiModelProperty(example = "2018-06-22T00:00:00.000+0000", value = "Meal Start Date")
+
+  @Valid
+
+  public ZonedDateTime getMealDate() {
+    return mealDate;
+  }
+
+  public void setMealDate(ZonedDateTime mealDate) {
+    this.mealDate = mealDate;
+  }
+
+  public Meal chef(Chef chef) {
+    this.chef = chef;
+    return this;
+  }
+
+  /**
+   * Get chef
+   * @return chef
   **/
   @ApiModelProperty(value = "")
 
   @Valid
 
-  public ZonedDateTime getOrderClosedBy() {
-    return orderClosedBy;
+  public Chef getChef() {
+    return chef;
   }
 
-  public void setOrderClosedBy(ZonedDateTime orderClosedBy) {
-    this.orderClosedBy = orderClosedBy;
+  public void setChef(Chef chef) {
+    this.chef = chef;
   }
 
-  public Meal createdDate(ZonedDateTime createdDate) {
-    this.createdDate = createdDate;
-    return this;
-  }
-
-  /**
-   * Get createdDate
-   * @return createdDate
-  **/
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public ZonedDateTime getCreatedDate() {
-    return createdDate;
-  }
-
-  public void setCreatedDate(ZonedDateTime createdDate) {
-    this.createdDate = createdDate;
-  }
-
-  public Meal currencyEquivalent(BigDecimal currencyEquivalent) {
-    this.currencyEquivalent = currencyEquivalent;
-    return this;
-  }
-
-  /**
-   * Get currencyEquivalent
-   * @return currencyEquivalent
-  **/
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public BigDecimal getCurrencyEquivalent() {
-    return currencyEquivalent;
-  }
-
-  public void setCurrencyEquivalent(BigDecimal currencyEquivalent) {
-    this.currencyEquivalent = currencyEquivalent;
-  }
-
-  public Meal mealHeader(String mealHeader) {
-    this.mealHeader = mealHeader;
-    return this;
-  }
-
-  /**
-   * Get mealHeader
-   * @return mealHeader
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getMealHeader() {
-    return mealHeader;
-  }
-
-  public void setMealHeader(String mealHeader) {
-    this.mealHeader = mealHeader;
-  }
-
-  public Meal estimatedDelivery(ZonedDateTime estimatedDelivery) {
-    this.estimatedDelivery = estimatedDelivery;
-    return this;
-  }
-
-  /**
-   * Get estimatedDelivery
-   * @return estimatedDelivery
-  **/
-  @ApiModelProperty(value = "")
-
-  @Valid
-
-  public ZonedDateTime getEstimatedDelivery() {
-    return estimatedDelivery;
-  }
-
-  public void setEstimatedDelivery(ZonedDateTime estimatedDelivery) {
-    this.estimatedDelivery = estimatedDelivery;
-  }
-
-  public Meal tags(String tags) {
+  public Meal tags(MealTags tags) {
     this.tags = tags;
     return this;
   }
@@ -212,113 +152,14 @@ public class Meal   {
   **/
   @ApiModelProperty(value = "")
 
+  @Valid
 
-  public String getTags() {
+  public MealTags getTags() {
     return tags;
   }
 
-  public void setTags(String tags) {
+  public void setTags(MealTags tags) {
     this.tags = tags;
-  }
-
-  public Meal mealsLeft(String mealsLeft) {
-    this.mealsLeft = mealsLeft;
-    return this;
-  }
-
-  /**
-   * Get mealsLeft
-   * @return mealsLeft
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getMealsLeft() {
-    return mealsLeft;
-  }
-
-  public void setMealsLeft(String mealsLeft) {
-    this.mealsLeft = mealsLeft;
-  }
-
-  public Meal mealsAvailable(String mealsAvailable) {
-    this.mealsAvailable = mealsAvailable;
-    return this;
-  }
-
-  /**
-   * Get mealsAvailable
-   * @return mealsAvailable
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getMealsAvailable() {
-    return mealsAvailable;
-  }
-
-  public void setMealsAvailable(String mealsAvailable) {
-    this.mealsAvailable = mealsAvailable;
-  }
-
-  public Meal source(String source) {
-    this.source = source;
-    return this;
-  }
-
-  /**
-   * Get source
-   * @return source
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getSource() {
-    return source;
-  }
-
-  public void setSource(String source) {
-    this.source = source;
-  }
-
-  public Meal pickupInfo(String pickupInfo) {
-    this.pickupInfo = pickupInfo;
-    return this;
-  }
-
-  /**
-   * Get pickupInfo
-   * @return pickupInfo
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getPickupInfo() {
-    return pickupInfo;
-  }
-
-  public void setPickupInfo(String pickupInfo) {
-    this.pickupInfo = pickupInfo;
-  }
-
-  public Meal additionalInfo(String additionalInfo) {
-    this.additionalInfo = additionalInfo;
-    return this;
-  }
-
-  /**
-   * Get additionalInfo
-   * @return additionalInfo
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public String getAdditionalInfo() {
-    return additionalInfo;
-  }
-
-  public void setAdditionalInfo(String additionalInfo) {
-    this.additionalInfo = additionalInfo;
   }
 
 
@@ -331,24 +172,17 @@ public class Meal   {
       return false;
     }
     Meal meal = (Meal) o;
-    return Objects.equals(this.summary, meal.summary) &&
-        Objects.equals(this.token, meal.token) &&
-        Objects.equals(this.orderClosedBy, meal.orderClosedBy) &&
-        Objects.equals(this.createdDate, meal.createdDate) &&
-        Objects.equals(this.currencyEquivalent, meal.currencyEquivalent) &&
-        Objects.equals(this.mealHeader, meal.mealHeader) &&
-        Objects.equals(this.estimatedDelivery, meal.estimatedDelivery) &&
-        Objects.equals(this.tags, meal.tags) &&
-        Objects.equals(this.mealsLeft, meal.mealsLeft) &&
-        Objects.equals(this.mealsAvailable, meal.mealsAvailable) &&
-        Objects.equals(this.source, meal.source) &&
-        Objects.equals(this.pickupInfo, meal.pickupInfo) &&
-        Objects.equals(this.additionalInfo, meal.additionalInfo);
+    return Objects.equals(this.id, meal.id) &&
+        Objects.equals(this.title, meal.title) &&
+        Objects.equals(this.image, meal.image) &&
+        Objects.equals(this.mealDate, meal.mealDate) &&
+        Objects.equals(this.chef, meal.chef) &&
+        Objects.equals(this.tags, meal.tags);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(summary, token, orderClosedBy, createdDate, currencyEquivalent, mealHeader, estimatedDelivery, tags, mealsLeft, mealsAvailable, source, pickupInfo, additionalInfo);
+    return Objects.hash(id, title, image, mealDate, chef, tags);
   }
 
   @Override
@@ -356,19 +190,12 @@ public class Meal   {
     StringBuilder sb = new StringBuilder();
     sb.append("class Meal {\n");
     
-    sb.append("    summary: ").append(toIndentedString(summary)).append("\n");
-    sb.append("    token: ").append(toIndentedString(token)).append("\n");
-    sb.append("    orderClosedBy: ").append(toIndentedString(orderClosedBy)).append("\n");
-    sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
-    sb.append("    currencyEquivalent: ").append(toIndentedString(currencyEquivalent)).append("\n");
-    sb.append("    mealHeader: ").append(toIndentedString(mealHeader)).append("\n");
-    sb.append("    estimatedDelivery: ").append(toIndentedString(estimatedDelivery)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    title: ").append(toIndentedString(title)).append("\n");
+    sb.append("    image: ").append(toIndentedString(image)).append("\n");
+    sb.append("    mealDate: ").append(toIndentedString(mealDate)).append("\n");
+    sb.append("    chef: ").append(toIndentedString(chef)).append("\n");
     sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
-    sb.append("    mealsLeft: ").append(toIndentedString(mealsLeft)).append("\n");
-    sb.append("    mealsAvailable: ").append(toIndentedString(mealsAvailable)).append("\n");
-    sb.append("    source: ").append(toIndentedString(source)).append("\n");
-    sb.append("    pickupInfo: ").append(toIndentedString(pickupInfo)).append("\n");
-    sb.append("    additionalInfo: ").append(toIndentedString(additionalInfo)).append("\n");
     sb.append("}");
     return sb.toString();
   }

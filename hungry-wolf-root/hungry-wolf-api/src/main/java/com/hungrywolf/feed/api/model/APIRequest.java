@@ -55,6 +55,12 @@ public class APIRequest {
 	public void setRequestProperties(Map<String, String> requestProperties) {
 		this.requestProperties = requestProperties;
 	}
+	
+	public void addRequestProperties(String key, String value) {
+		if(this.requestProperties != null) {
+			this.requestProperties.put(key, value);
+		}
+	}
 
 	public void setResponseProperties(Map<String, Object> responseProperties) {
 		this.responseProperties = responseProperties;

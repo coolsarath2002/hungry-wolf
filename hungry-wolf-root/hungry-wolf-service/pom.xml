@@ -10,7 +10,7 @@
   </parent>
   <groupId>com.hungrywolf.feed</groupId>
   <artifactId>hungry-wolf-service</artifactId>
-  <version>1.LOCAL</version>
+  
   <name>hungry-wolf-service</name>
   <url>http://maven.apache.org</url>
   <packaging>jar</packaging>
@@ -74,10 +74,20 @@
     		<artifactId>spring-security-core</artifactId>
     		<version>4.2.7.RELEASE</version>
 		</dependency> -->
+		<dependency>
+        	 <groupId>com.hungrywolf.feed</groupId>
+  			 <artifactId>hungry-wolf-facts</artifactId>
+  			 <version>1.LOCAL</version>
+        </dependency>
+        <dependency>
+        	 <groupId>com.hungrywolf.feed</groupId>
+  			 <artifactId>hungry-wolf-base</artifactId>
+  			 <version>1.LOCAL</version>
+        </dependency>
     </dependencies>
 
     <build>
-        <finalName>bpm-service</finalName>
+        <finalName>hungrywolf-service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

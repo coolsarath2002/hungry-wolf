@@ -20,105 +20,812 @@ security:
   - APISecurity: []
 
 paths:
-  '/meals/zipcode/{zipcode}':
+  /customer/meals:
     get:
       tags:
-        - Meals
-      description: Meals controller
-      operationId: getMealsByZipCode
+        - Today meals
+      description: Get Today meals
+      operationId: getTodayMeals
       produces:
         - application/json
-      parameters:
-        - name: path
-          in: zipcode
-          description: zipcode details for fetching the meal.
-          required: true
-          type: string   
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Meals'
-            
-  '/meals/tag/{tag}':
-    get:
-      tags:
-        - Meals
-      description: Meals controller
-      operationId: getMealsByTags
-      produces:
-        - application/json
-      parameters:
-        - name: path
-          in: tag
-          description: tag details for fetching the meal.
-          required: true
-          type: string   
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Meals'
-  '/meals/status/{status}':
-    get:
-      tags:
-        - Meals
-      description: Meals by status 
-      operationId: getMealsByStatus
-      produces:
-        - application/json
-      parameters:
-        - name: path
-          in: tag
-          description: tag details for fetching the meal.
-          required: true
-          type: string   
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Meals'    
-                               
-definitions:
 
-   Meals:
-       type: object
-       properties:
-         mealList:
-           type: array
-           items:
-             $ref: '#/definitions/Meal'
-   Meal:
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/Meals'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+    post:
+      tags:
+        - Today meals
+      description: Get Today meals
+      operationId: getTodaysMealsByTags
+      produces:
+        - application/json
+      parameters:
+        - name: request
+          in: body
+          description: Meals List
+          required: true
+          schema:
+            $ref: '#/definitions/MealsSearch'
+      responses:
+        '200':
+          description: New Service Creation Response
+          schema:
+            $ref: '#/definitions/Meals'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+  /customer/meals/{id}:
+    get:
+      tags:
+        - Today meals
+      description: Get Today meals
+      operationId: getTodayMealsById
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/Meals'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+  
+  /customer/meals/{id}/details:
+    get:
+      tags:
+        - Today meals
+      description: Get Today meals
+      operationId: getMealsDetails
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/MealDetails'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+  
+  /customer/meals/{id}/details/serving:
+    get:
+      tags:
+        - Today meals
+      description: Get Today meals
+      operationId: getMealsServingDetails
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/MealServing'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+  
+  /customer/meals/{id}/details/delivery:
+    get:
+      tags:
+        - Today meals
+      description: Get Today meals
+      operationId: getMealsDeliveryDetails
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/MealDelivery'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel' 
+  
+  /customer/meals/details/{id}/rating:
+    get:
+      tags:
+        - Today meals
+      description: Get Today meals
+      operationId: getMealsPricingInfo
+      parameters:
+        - in: path
+          name: id
+          type: string
+          required: true
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/PricingInfos'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+  
+  
+  /customer/cart:
+    post:
+      tags:
+        - Cart 
+      description: Create Cart
+      operationId: createCart
+      produces:
+        - application/json
+      parameters:
+         - name: request
+           in: body
+           description: Process Details
+           required: true
+           schema:
+            $ref: '#/definitions/Cart'
+      responses:
+        '200':
+          description: OK
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+            
+  /customer/user/{userId}/cart:
+    get:
+      tags:
+        - Cart
+      description: Get Today meals
+      operationId: getCart
+      parameters:
+        - in: path
+          name: userId
+          type: string
+          required: true
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/Cart'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+    put:
+      tags:
+        - Cart
+      description: updateCart
+      operationId: updateCart
+      parameters:
+        - in: path
+          name: userId
+          type: string
+          required: true
+        - name: request
+          in: body
+          description: Process Details
+          required: true
+          schema:
+            $ref: '#/definitions/Cart'
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/Cart'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'          
+            
+  /customer/cartToOrder/:
+    post:
+      tags:
+        - Order 
+      description: Create Order
+      operationId: createOrder
+      produces:
+        - application/json
+      parameters:
+         - name: request
+           in: body
+           description: Process Details
+           required: true
+           schema:
+            $ref: '#/definitions/Order'
+      responses:
+        '200':
+          description: OK
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'   
+  
+  /customer/order/{orderhwrn}/orderStatus:
+    get:
+      tags:
+        - Order
+      description: Get Order Status
+      operationId: getOrderStatus
+      parameters:
+        - in: path
+          name: orderhwrn
+          type: string
+          required: true
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/OrderStatus'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+  
+  /account/user:
+    post:
+      tags:
+        - Account 
+      description: Create new user
+      operationId: createUser
+      parameters:
+        - name: request
+          in: body
+          description: user details
+          required: true
+          schema:
+            $ref: '#/definitions/User' 
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: "OK"
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'  
+    put:
+      tags:
+        - Account 
+      description: update user
+      operationId: updateUser
+      parameters:
+        - name: request
+          in: body
+          description: user details
+          required: true
+          schema:
+            $ref: '#/definitions/User' 
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: "OK"
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'      
+  
+      
+definitions:
+  User:
+    type: object
+    properties: 
+      id:
+        type: integer
+      firstName:
+        type: string
+      lastName:
+        type: string  
+      dateOfBirth:
+        type: string
+        format: date
+        example: "03-03-1985" 
+      phone:
+        type: string  
+      emailAddress:
+        type: string  
+      accountTypeID:
+        type: integer
+  
+  Account:
+    type: object
+    properties:
+      accountId:
+        type: integer
+      accountType:
+        type: string
+        enum: 
+          - WOLF
+          - BUNNY
+      accountStatus:
+        type: string
+        enum:
+          - ACTIVE
+          - INACTIVE
+          - SUSPENDED
+           
+      
+  IdentityCheck:
+    type: object
+    properties:
+      IdentityCheckId:
+        type: integer
+      IDCheckType:
+        type: string
+        enum: 
+          - EMAIL
+          - PHONE
+      verifiedDate:
+        type: string
+        format: date-time
+      identityCheckStatus:
+        type: string
+        enum:
+          - VERIFIED
+          - NOT-VERIFIED
+          - NONE      
+      userId:
+        type: string
+        
+  LoginUser:
       type: object
       properties:
-         summary:
-           type: string
-         token:
-           type: string
-         orderClosedBy:
-           type: string
-           format: date-time
-         createdDate:
-           type: string
-           format: date-time
-         currencyEquivalent:
-           type: number
-           format: int32
-         meal_header:
-            type: string
-         estimatedDelivery:
-            type: string
-            format: date-time
-         tags:
-            type: string
-         mealsLeft: 
-            type: string
-         mealsAvailable:           
-            type: string
-         source:
-            type: string
-         pickup_info:
-            type: string
-         additionalInfo:
-            type: string      
+        loginUserId:
+          type: integer
+        username:
+          type: string
+        passwordHash:
+          type: string
+        salt:
+          type: string
+        userId:
+          type: string
+        lastLoggedIn:
+          type: string  
+  
+  AccessToken:
+    type: object
+    properties:
+      userId:
+        type: string
+      accessToken:
+        type: string
+      refreshToken:
+        type: string
+      
+      
+          
+  OrderStatus:
+    type: object
+    properties:
+      orderHwrn:
+        type: string
+      orderStatus: 
+        type: string
+        enum:
+          - OPEN
+          - CANCELLED
+          - SUSPENDED
+          - COMPLETED
+      reasonCd:
+        type: string
+      reasonNotes:
+        type: string  
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/OrderStatusTracker'  
  
+  OrderStatusTracker:
+    type: object
+    properties:
+      step:
+        type: string
+        enum:
+          - NOT STARTED
+          - ORDER PLACED
+          - AWAITING CHEF ACCEPTANCE
+          - CHEF ACCEPTED
+          - PREPARATION
+          - COOKING
+          - PACKAGING
+          - SHIPPING
+          - READY FOR DELIVERY
+          - READY FOR PICKUP
+      completedDate:
+        type: string
+        format: date-time
+      dueDate: 
+        type: string
+        format: date-time
+      startDate:
+        type: string
+        format: date-time
+      status:
+        type: string
+        enum:
+          - COMPLETED
+          - OPEN
+          - SUSPENDED
+          
+  Order:
+    type: object
+    properties:
+      id:
+        type: integer
+      orderHwrn:
+        type: string
+        example: "0012459-1235689-154263"
+      createdDate:
+        type: string
+        format: date-time
+      orderPlacedDate:
+        type: string
+        format: date-time
+      modifiedDate:  
+        type: string
+        format: date-time
+      applyDiscount:
+        type: string
+        example: "HUNGRYCHALLENGE"
+        enum:
+          - NONE
+          - FIRSTFIV
+          - HUNGRYCHALLENGE
+          - BETHECHANGE
+          - HAPPYDA
+          - AWAYFROMHOME
+          - MONTHEND
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItems'
+  
+  OrderItems:
+    type: object
+    properties:
+      cartItemId:
+        type: integer
+        example: "123456"
+      scheduledDeliveryDate:
+        type: string
+        example: "31/03/2019"
+      scheduledDeliveryTime:
+        type: string
+        example: "18:05:00"
+      deliveryMethod:
+        type: string
+        enum:
+          - DELIVERY
+          - PICK-UP
+        
+  Cart:
+    type: object
+    properties:
+      cartHWSN:
+        type: string
+        format: '{wolfId}-C{CartNum}'
+        example: '00001-C456987'
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/CartItems'
+  
+  CartItems:
+    type: object
+    properties:
+      id: 
+        type: integer
+      mealDetails:
+        $ref: '#/definitions/MealDetails'
+      isCustomChanges:
+        type: boolean
+      chefId:
+        type: integer
+      quantity:
+        type: integer
+      createdDate:
+        type: string
+        format: date-time
+      createdUser:
+        type: string
+      modifiedDate:
+        type: string
+        format: date-time
+      modifiedUser:
+        type: string
+      isDeleted:
+        type: boolean
+        
+  Meals:
+    type: object
+    properties:
+      mealList:
+        type: array
+        items:
+          $ref: '#/definitions/Meal'
+          
+  MealDetails:
+    type: object
+    properties:
+      meal:
+        $ref: '#/definitions/Meal'
+      mealSummary:    
+        $ref: '#/definitions/MealSummary'
+      mealServing:
+        $ref: '#/definitions/MealServing'
+      mealDelivery:
+        $ref: '#/definitions/MealDelivery'
+      pricing:
+        $ref: '#/definitions/PricingInfo'  
+  
+  PricingInfos:
+    type: object
+    properties:
+      pricingType:
+        type: string
+        format: string
+        description: delivery type
+        example: pickup, delivery 
+      pricingInfo:
+        $ref: '#/definitions/PricingInfo'   
+  
+  PricingInfo:
+    type: object
+    properties:
+      id:
+        type: integer
+      rateCd:
+        type: string
+        format: string
+      rate:
+        type: string
+        format: string
+      currency:
+        type: string
+        format: string
+      rateType:
+        type: string
+        format: string
+        
+  Meal:
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+        description: asdfasd
+        example: adadas
+      image:
+        type: string
+        description: url for the meal
+        example: 001
+      mealDate:
+        type: string
+        format: date-time
+        description: Meal Start Date
+        example: 2018-06-22T00:00:00.000Z  
+      chef:
+        $ref: '#/definitions/Chef'
+      tags:
+        $ref: '#/definitions/MealTags'
+  
+  MealsSearch:
+    type: object
+    properties:
+      search:
+        $ref: '#/definitions/SearchCriteria'  
+  
+  MealTags:
+    type: object
+    properties:
+      id:
+        type: integer
+      mealId:
+        type: integer  
+      tags:
+        type: array
+        items:
+          type: string
+          format: string
+  
+  SearchCriteria:
+    type: object
+    properties:
+      searchBy:
+        type: string
+        items:
+          format: string
+      sortBy:
+        type: string
+        items:
+          format: string
+  Chef:    
+    type: object
+    properties:
+      id:
+        type: integer
+      userId:
+        type: string
+      avatar:
+        type: string
+      rating:
+        $ref: '#/definitions/ChefRating'
+        
+      
+  ChefRating:
+    type: object
+    properties:
+      id:
+        type: integer
+      overall:
+        type: number
+        format: int32
+      detail:
+        $ref: '#/definitions/ChefRatingDetails'  
+  
+  ChefRatingDetails:
+    type: object
+    properties:
+      id:
+        type: integer
+      mealId:
+        type: integer
+      chefId:
+        type: integer
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/ChefRatingDetail'
+        
+  
+  ChefRatingDetail:
+    type: object
+    properties:
+      id:
+        type: integer
+      mealId:
+        type: integer
+      rating:
+        type: number
+        format: int32
+        description: amount 
+        example: 15.25 
+      ratingFactorDesc:
+        type: string
+        example: "Quantity" 
+      ratingCd:
+        type: string
+        example: "QTY" 
+            
+  
+  MealSummary:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/MealItems' 
+          
+  MealServing:
+    type: object
+    properties:
+      id:
+        type: integer
+      mealId:
+        type: integer  
+      available:
+        type: number
+        format: int32
+        description: amount 
+        example: 15.25
+      timeLeft:
+        type: string
+        format: string
+        description: time in mins 
+        example: 15.25
+      mealDate:
+        type: string
+        format: date-time
+        description: Meal Order deadline Date
+        example: 2018-06-22T00:00:00.000Z 
+      orderClosedBy:
+        type: string
+        format: date-time
+        description: Meal Order deadline Date
+        example: 2018-06-22T00:00:00.000Z
+  
+  MealDelivery:
+    type: object
+    properties:
+      id:
+        type: integer
+      mealId:
+        type: integer  
+      deliveryType:
+        type: string
+        format: string
+        description: delivery type
+        example: pickup, delivery 
+      mealDate:
+        type: string
+        format: date-time
+        description: Meal Order deadline Date
+        example: 2018-06-22T00:00:00.000Z       
+  
+  MealItems:
+    type: object
+    properties:
+      mealId:
+        type: integer
+      itemId:
+        type: string
+        description:  sdfsdf
+      desc:
+        type: string
+        description: meal item desc
+      dishType:
+        type: string
+        description: gravy/sauce
+      measurement:
+        type: string
+        description: serving measurement
+        
+  errorModel:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        example: 500
+      message:
+        type: string
+        example: Illegal Argument Exception

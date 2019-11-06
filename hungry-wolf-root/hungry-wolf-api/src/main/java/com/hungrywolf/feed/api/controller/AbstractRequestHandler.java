@@ -30,7 +30,7 @@ public abstract class AbstractRequestHandler implements ApplicationEventPublishe
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(HungryWolfAPIException.class)
 	@ResponseBody
-	public APIResponse<Object> handleSpagettiAPIException(HungryWolfAPIException validExcep, WebRequest request,
+	public APIResponse<Object> handleHungryWolfAPIException(HungryWolfAPIException validExcep, WebRequest request,
 			HttpServletResponse response) {
 		//LOGGER.info("Exception on API ");
 		return null;

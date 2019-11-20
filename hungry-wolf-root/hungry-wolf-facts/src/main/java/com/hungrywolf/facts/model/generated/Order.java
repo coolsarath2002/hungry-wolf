@@ -11,6 +11,8 @@ import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.data.annotation.Id;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -19,14 +21,21 @@ import javax.validation.constraints.*;
  * Order
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-11-03T01:23:28.090-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-11-06T23:59:46.035-08:00")
 
 public class Order   {
+  @Id
   @JsonProperty("id")
   private Integer id = null;
 
   @JsonProperty("orderHwrn")
   private String orderHwrn = null;
+
+  @JsonProperty("cartId")
+  private Integer cartId = null;
+
+  @JsonProperty("wolfId")
+  private Integer wolfId = null;
 
   @JsonProperty("createdDate")
   private ZonedDateTime createdDate = null;
@@ -38,22 +47,62 @@ public class Order   {
   private ZonedDateTime modifiedDate = null;
 
   /**
-   * Gets or Sets applyDiscount
+   * O - OPEN C - CANCELLED D - DELETED I - INPROGRESS P - PARTIALLY DELIVERED
+   */
+  public enum StatusEnum {
+    O("O"),
+    
+    C("C"),
+    
+    D("D"),
+    
+    I("I"),
+    
+    P("P");
+
+    private String value;
+
+    StatusEnum(String value) {
+      this.value = value;
+    }
+
+    @Override
+    @JsonValue
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static StatusEnum fromValue(String text) {
+      for (StatusEnum b : StatusEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+  }
+
+  @JsonProperty("status")
+  private StatusEnum status = null;
+
+  /**
+   * NN - NONE FF - FIRSTFIV HG - HUNGRYCHALLENGE BG - BETHECHANGE HD - HAPPYDA AH - AWAYFROMHOME ME - MONTHEND
    */
   public enum ApplyDiscountEnum {
-    NONE("NONE"),
+    NN("NN"),
     
-    FIRSTFIV("FIRSTFIV"),
+    FF("FF"),
     
-    HUNGRYCHALLENGE("HUNGRYCHALLENGE"),
+    HG("HG"),
     
-    BETHECHANGE("BETHECHANGE"),
+    BG("BG"),
     
-    HAPPYDA("HAPPYDA"),
+    HD("HD"),
     
-    AWAYFROMHOME("AWAYFROMHOME"),
+    AH("AH"),
     
-    MONTHEND("MONTHEND");
+    ME("ME");
 
     private String value;
 
@@ -125,6 +174,46 @@ public class Order   {
     this.orderHwrn = orderHwrn;
   }
 
+  public Order cartId(Integer cartId) {
+    this.cartId = cartId;
+    return this;
+  }
+
+  /**
+   * Get cartId
+   * @return cartId
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public Integer getCartId() {
+    return cartId;
+  }
+
+  public void setCartId(Integer cartId) {
+    this.cartId = cartId;
+  }
+
+  public Order wolfId(Integer wolfId) {
+    this.wolfId = wolfId;
+    return this;
+  }
+
+  /**
+   * Get wolfId
+   * @return wolfId
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public Integer getWolfId() {
+    return wolfId;
+  }
+
+  public void setWolfId(Integer wolfId) {
+    this.wolfId = wolfId;
+  }
+
   public Order createdDate(ZonedDateTime createdDate) {
     this.createdDate = createdDate;
     return this;
@@ -188,16 +277,36 @@ public class Order   {
     this.modifiedDate = modifiedDate;
   }
 
+  public Order status(StatusEnum status) {
+    this.status = status;
+    return this;
+  }
+
+  /**
+   * O - OPEN C - CANCELLED D - DELETED I - INPROGRESS P - PARTIALLY DELIVERED
+   * @return status
+  **/
+  @ApiModelProperty(value = "O - OPEN C - CANCELLED D - DELETED I - INPROGRESS P - PARTIALLY DELIVERED")
+
+
+  public StatusEnum getStatus() {
+    return status;
+  }
+
+  public void setStatus(StatusEnum status) {
+    this.status = status;
+  }
+
   public Order applyDiscount(ApplyDiscountEnum applyDiscount) {
     this.applyDiscount = applyDiscount;
     return this;
   }
 
   /**
-   * Get applyDiscount
+   * NN - NONE FF - FIRSTFIV HG - HUNGRYCHALLENGE BG - BETHECHANGE HD - HAPPYDA AH - AWAYFROMHOME ME - MONTHEND
    * @return applyDiscount
   **/
-  @ApiModelProperty(example = "HUNGRYCHALLENGE", value = "")
+  @ApiModelProperty(example = "HUNGRYCHALLENGE", value = "NN - NONE FF - FIRSTFIV HG - HUNGRYCHALLENGE BG - BETHECHANGE HD - HAPPYDA AH - AWAYFROMHOME ME - MONTHEND")
 
 
   public ApplyDiscountEnum getApplyDiscount() {
@@ -249,16 +358,19 @@ public class Order   {
     Order order = (Order) o;
     return Objects.equals(this.id, order.id) &&
         Objects.equals(this.orderHwrn, order.orderHwrn) &&
+        Objects.equals(this.cartId, order.cartId) &&
+        Objects.equals(this.wolfId, order.wolfId) &&
         Objects.equals(this.createdDate, order.createdDate) &&
         Objects.equals(this.orderPlacedDate, order.orderPlacedDate) &&
         Objects.equals(this.modifiedDate, order.modifiedDate) &&
+        Objects.equals(this.status, order.status) &&
         Objects.equals(this.applyDiscount, order.applyDiscount) &&
         Objects.equals(this.items, order.items);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, orderHwrn, createdDate, orderPlacedDate, modifiedDate, applyDiscount, items);
+    return Objects.hash(id, orderHwrn, cartId, wolfId, createdDate, orderPlacedDate, modifiedDate, status, applyDiscount, items);
   }
 
   @Override
@@ -268,9 +380,12 @@ public class Order   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    orderHwrn: ").append(toIndentedString(orderHwrn)).append("\n");
+    sb.append("    cartId: ").append(toIndentedString(cartId)).append("\n");
+    sb.append("    wolfId: ").append(toIndentedString(wolfId)).append("\n");
     sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
     sb.append("    orderPlacedDate: ").append(toIndentedString(orderPlacedDate)).append("\n");
     sb.append("    modifiedDate: ").append(toIndentedString(modifiedDate)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    applyDiscount: ").append(toIndentedString(applyDiscount)).append("\n");
     sb.append("    items: ").append(toIndentedString(items)).append("\n");
     sb.append("}");

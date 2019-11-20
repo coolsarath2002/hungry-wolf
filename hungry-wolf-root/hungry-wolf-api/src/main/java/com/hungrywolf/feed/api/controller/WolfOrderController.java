@@ -20,6 +20,9 @@ import com.hungrywolf.facts.model.generated.Cart;
 import com.hungrywolf.facts.model.generated.ChefRating;
 import com.hungrywolf.facts.model.generated.ChefRatingDetails;
 import com.hungrywolf.facts.model.generated.MealDetails;
+import com.hungrywolf.facts.model.generated.Order;
+import com.hungrywolf.facts.model.generated.OrderEvent;
+import com.hungrywolf.facts.model.generated.OrderStatusTracker;
 import com.hungrywolf.feed.api.delegate.ProcessRequestHandler;
 import com.hungrywolf.feed.api.exception.HungryWolfAPIException;
 import com.hungrywolf.feed.api.model.APIRequest;
@@ -35,7 +38,7 @@ public class WolfOrderController {
 	
 	@Autowired
 	@Qualifier("wolfOrderAPIRequestHandler")
-	public ProcessRequestHandler<Cart> wolfOrderAPIRequestHandler;
+	public ProcessRequestHandler<Order> wolfOrderAPIRequestHandler;
 	
 	
 	
@@ -43,13 +46,42 @@ public class WolfOrderController {
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/wolf/{wolfId}/placeOrder", method = RequestMethod.POST, consumes = { "application/json",
 			"application/octet-stream" }, produces = { "application/json", "application/octet-stream" })
-	public Cart getChefRating(@PathVariable("wolfId") String wolfId, @RequestBody Cart cart,@RequestHeader Map<String, String> header,
+	public Order createOrder(@PathVariable("wolfId") String wolfId, @RequestBody Cart cart,@RequestHeader Map<String, String> header,
 			HttpServletRequest request) throws HungryWolfAPIException {
 		APIRequest apiRequest = new APIRequest();
 		
 		apiRequest.addRequestProperties("wolfId", wolfId);
 		apiRequest.addRequestProperties("role", "wolf");
-		APIResponse<Cart> apiReponse = wolfOrderAPIRequestHandler.save(apiRequest);
+		APIResponse<Order> apiReponse = wolfOrderAPIRequestHandler.validateAndPerform(apiRequest);
+		return apiReponse.getItem();
+	}
+	
+	
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/chef/{chefId}/order/{orderHWRN}", method = RequestMethod.POST, consumes = { "application/json",
+			"application/octet-stream" }, produces = { "application/json", "application/octet-stream" })
+	public Order updateOrderStatus(@PathVariable("chefId") String chefId, @PathVariable("orderHWRN") String orderHWRN,@RequestHeader Map<String, String> header,
+			HttpServletRequest request) throws HungryWolfAPIException {
+		APIRequest apiRequest = new APIRequest();
+		
+		apiRequest.addRequestProperties("chefId", chefId);
+		apiRequest.addRequestProperties("role", "chef");
+		APIResponse<Order> apiReponse = wolfOrderAPIRequestHandler.validateAndPerform(apiRequest);
+		return apiReponse.getItem();
+	}
+	
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/chef/{chefId}/order/{orderHWRN}/item/{orderItemHWRN}", method = RequestMethod.POST, consumes = { "application/json",
+			"application/octet-stream" }, produces = { "application/json", "application/octet-stream" })
+	public Order updateOrderItemStatus(@PathVariable("chefId") String chefId, @PathVariable("orderHWRN") @RequestBody OrderEvent orderEvents,@RequestHeader Map<String, String> header,
+			HttpServletRequest request) throws HungryWolfAPIException {
+		APIRequest apiRequest = new APIRequest();
+		
+		apiRequest.addRequestProperties("chefId", chefId);
+		apiRequest.addRequestProperties("role", "chef");
+		APIResponse<Order> apiReponse = wolfOrderAPIRequestHandler.validateAndPerform(apiRequest);
 		return apiReponse.getItem();
 	}
 	

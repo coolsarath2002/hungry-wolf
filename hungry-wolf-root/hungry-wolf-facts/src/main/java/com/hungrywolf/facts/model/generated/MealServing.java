@@ -37,6 +37,9 @@ public class MealServing   {
 
   @JsonProperty("orderClosedBy")
   private ZonedDateTime orderClosedBy = null;
+  
+  @JsonProperty("scheduledDeliveryDate")
+  private ZonedDateTime scheduledDeliveryDate = null;
 
   public MealServing id(Integer id) {
     this.id = id;
@@ -162,6 +165,27 @@ public class MealServing   {
   }
 
 
+  public MealServing scheduledDeliveryDate(ZonedDateTime scheduledDeliveryDate) {
+	    this.scheduledDeliveryDate = scheduledDeliveryDate;
+	    return this;
+	  }
+
+	  /**
+	   * Meal Order deadline Date
+	   * @return orderClosedBy
+	  **/
+	  @ApiModelProperty(example = "2018-06-22T00:00:00.000+0000", value = "Meal Order deadline Date")
+
+	  @Valid
+
+	  public ZonedDateTime getScheduledDeliveryDate() {
+	    return scheduledDeliveryDate;
+	  }
+
+	  public void setScheduledDeliveryDate(ZonedDateTime scheduledDeliveryDate) {
+	    this.scheduledDeliveryDate = scheduledDeliveryDate;
+	  }
+  
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {

@@ -78,6 +78,11 @@ public class MealService {
 		return false;
 	}
 	
+	public void updateQuantity(@Valid MealDetails mealDetails, Integer quantity) {
+		mealRepository.updateMealAvailability(mealDetails.getMealServing(), quantity);
+		
+	}
+	
 	public String calculateTimeLeft(@Valid MealServing mealServing) {
 		return Utils.calculateRemainingHoursDays(mealServing.getOrderClosedBy(), ZonedDateTime.now());
 	}

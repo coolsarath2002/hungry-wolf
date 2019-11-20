@@ -17,7 +17,7 @@ import javax.validation.constraints.*;
  * OrderStatusTracker
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-11-03T01:23:28.090-07:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-11-06T23:59:46.035-08:00")
 
 public class OrderStatusTracker   {
   /**
@@ -78,42 +78,6 @@ public class OrderStatusTracker   {
 
   @JsonProperty("startDate")
   private ZonedDateTime startDate = null;
-
-  /**
-   * Gets or Sets status
-   */
-  public enum StatusEnum {
-    COMPLETED("COMPLETED"),
-    
-    OPEN("OPEN"),
-    
-    SUSPENDED("SUSPENDED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static StatusEnum fromValue(String text) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
-
-  @JsonProperty("status")
-  private StatusEnum status = null;
 
   public OrderStatusTracker step(StepEnum step) {
     this.step = step;
@@ -198,26 +162,6 @@ public class OrderStatusTracker   {
     this.startDate = startDate;
   }
 
-  public OrderStatusTracker status(StatusEnum status) {
-    this.status = status;
-    return this;
-  }
-
-  /**
-   * Get status
-   * @return status
-  **/
-  @ApiModelProperty(value = "")
-
-
-  public StatusEnum getStatus() {
-    return status;
-  }
-
-  public void setStatus(StatusEnum status) {
-    this.status = status;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -231,13 +175,12 @@ public class OrderStatusTracker   {
     return Objects.equals(this.step, orderStatusTracker.step) &&
         Objects.equals(this.completedDate, orderStatusTracker.completedDate) &&
         Objects.equals(this.dueDate, orderStatusTracker.dueDate) &&
-        Objects.equals(this.startDate, orderStatusTracker.startDate) &&
-        Objects.equals(this.status, orderStatusTracker.status);
+        Objects.equals(this.startDate, orderStatusTracker.startDate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(step, completedDate, dueDate, startDate, status);
+    return Objects.hash(step, completedDate, dueDate, startDate);
   }
 
   @Override
@@ -249,7 +192,6 @@ public class OrderStatusTracker   {
     sb.append("    completedDate: ").append(toIndentedString(completedDate)).append("\n");
     sb.append("    dueDate: ").append(toIndentedString(dueDate)).append("\n");
     sb.append("    startDate: ").append(toIndentedString(startDate)).append("\n");
-    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }

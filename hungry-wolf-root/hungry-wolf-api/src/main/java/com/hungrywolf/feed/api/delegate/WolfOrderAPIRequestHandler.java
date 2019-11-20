@@ -6,12 +6,14 @@ import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hungrywolf.base.db.helper.OrderUtils;
 import com.hungrywolf.facts.model.generated.Cart;
 import com.hungrywolf.facts.model.generated.CartItems;
 import com.hungrywolf.facts.model.generated.ChefRating;
 import com.hungrywolf.facts.model.generated.ChefRatingDetails;
 import com.hungrywolf.facts.model.generated.Meal;
 import com.hungrywolf.facts.model.generated.Order;
+import com.hungrywolf.facts.model.generated.OrderItems;
 import com.hungrywolf.facts.model.generated.PricingInfos;
 import com.hungrywolf.facts.model.generated.Rating;
 import com.hungrywolf.facts.model.generated.RatingDetails;
@@ -32,31 +34,24 @@ public class WolfOrderAPIRequestHandler implements ProcessRequestHandler<Order>{
 	@Autowired
 	private WolfCartService wolfCartService;
 	
-	@Autowired
-	private MealService mealService;
+	
 	
 	public APIResponse<Order> validateAndPerform(APIRequest apiRequest) throws HungryWolfAPIException{
 		APIResponse<Order> apiResponse = new APIResponse<Order>();
 		String wolfId = apiRequest.getRequestProperties().get("wolfId");
 		String role = apiRequest.getRequestProperties().get("role");
-		Cart cart = (Cart)apiRequest.getRequestObject();
-		Order newOrder = null;
-		Cart openCart = wolfCartService.getOpenCart(Integer.parseInt(wolfId));
-		//Check meals in the cart are still available.
-		if(openCart!=null && openCart.getItems() !=null && openCart.getItems().size() > 0) {
-			Iterator<CartItems> cartItemsItr = openCart.getItems().iterator();
-			while(cartItemsItr.hasNext()) {
-				CartItems nextItem = cartItemsItr.next();
-				if(mealService.checkAvailability(nextItem.getMealDetails(),nextItem.getQuantity())) {
-					 
-				}
-			}
-		}
+		Cart openCart = (Cart)apiRequest.getRequestObject();
+		
+		if(openCart == null) {
+			openCart = wolfCartService.getOpenCart(Integer.parseInt(wolfId));
+		
+		wolfOrderService.createNewOrder(openCart, wolfId);
+		
 		
 		//Check if the order close-by time is not elapsed
 		//check if the quantity of the order exist.
 		
-		try {
+		/*try {
 			switch(role) {
 			
 			
@@ -65,8 +60,10 @@ public class WolfOrderAPIRequestHandler implements ProcessRequestHandler<Order>{
 			apiResponse.setStatusCd(HttpStatus.SC_BAD_GATEWAY);
 			apiResponse.setStatusMsg("Not Found");
 			throw new HungryWolfAPIException("Something is not right!!!! " + ex);
+		}*/
+		
 		}
 		return apiResponse;
-	}
 	
+}
 }

@@ -85,7 +85,7 @@ paths:
           schema:
             $ref: '#/definitions/errorModel'
   
-  /customer/meals/details/{id}:
+  /customer/meals/{id}/details:
     get:
       tags:
         - Today meals
@@ -109,7 +109,7 @@ paths:
           schema:
             $ref: '#/definitions/errorModel'
   
-  /customer/meals/details/serving/{id}:
+  /customer/meals/{id}/details/serving:
     get:
       tags:
         - Today meals
@@ -133,7 +133,7 @@ paths:
           schema:
             $ref: '#/definitions/errorModel'
   
-  /customer/meals/details/delivery/{id}:
+  /customer/meals/{id}/details/delivery:
     get:
       tags:
         - Today meals
@@ -157,7 +157,7 @@ paths:
           schema:
             $ref: '#/definitions/errorModel' 
   
-  /customer/meals/details/payment/{id}:
+  /customer/meals/details/{id}/rating:
     get:
       tags:
         - Today meals
@@ -179,9 +179,467 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/errorModel'           
+            $ref: '#/definitions/errorModel'
+  
+  
+  /customer/cart:
+    post:
+      tags:
+        - Cart 
+      description: Create Cart
+      operationId: createCart
+      produces:
+        - application/json
+      parameters:
+         - name: request
+           in: body
+           description: Process Details
+           required: true
+           schema:
+            $ref: '#/definitions/Cart'
+      responses:
+        '200':
+          description: OK
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
             
+  /customer/user/{userId}/cart:
+    get:
+      tags:
+        - Cart
+      description: Get Today meals
+      operationId: getCart
+      parameters:
+        - in: path
+          name: userId
+          type: string
+          required: true
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/Cart'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+    put:
+      tags:
+        - Cart
+      description: updateCart
+      operationId: updateCart
+      parameters:
+        - in: path
+          name: userId
+          type: string
+          required: true
+        - name: request
+          in: body
+          description: Process Details
+          required: true
+          schema:
+            $ref: '#/definitions/Cart'
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/Cart'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'          
+            
+  /customer/cartToOrder/:
+    post:
+      tags:
+        - Order 
+      description: Create Order
+      operationId: createOrder
+      produces:
+        - application/json
+      parameters:
+         - name: request
+           in: body
+           description: Process Details
+           required: true
+           schema:
+            $ref: '#/definitions/Order'
+      responses:
+        '200':
+          description: OK
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'   
+  
+  /customer/order/{orderhwrn}/orderStatus:
+    get:
+      tags:
+        - Order
+      description: Get Order Status
+      operationId: getOrderStatus
+      parameters:
+        - in: path
+          name: orderhwrn
+          type: string
+          required: true
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: Meals List
+          schema:
+            $ref: '#/definitions/OrderStatus'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+  
+  /account/user:
+    post:
+      tags:
+        - Account 
+      description: Create new user
+      operationId: createUser
+      parameters:
+        - name: request
+          in: body
+          description: user details
+          required: true
+          schema:
+            $ref: '#/definitions/User' 
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: "OK"
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'  
+    put:
+      tags:
+        - Account 
+      description: update user
+      operationId: updateUser
+      parameters:
+        - name: request
+          in: body
+          description: user details
+          required: true
+          schema:
+            $ref: '#/definitions/User' 
+      produces:
+        - application/json
+
+      responses:
+        '200':
+          description: "OK"
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'      
+  
+      
 definitions:
+  User:
+    type: object
+    properties: 
+      id:
+        type: integer
+      firstName:
+        type: string
+      lastName:
+        type: string  
+      dateOfBirth:
+        type: string
+        format: date
+        example: "03-03-1985" 
+      phone:
+        type: string  
+      emailAddress:
+        type: string  
+      accountTypeID:
+        type: integer
+  
+  Account:
+    type: object
+    properties:
+      accountId:
+        type: integer
+      accountType:
+        type: string
+        enum: 
+          - WOLF
+          - BUNNY
+      accountStatus:
+        type: string
+        enum:
+          - ACTIVE
+          - INACTIVE
+          - SUSPENDED
+           
+      
+  IdentityCheck:
+    type: object
+    properties:
+      IdentityCheckId:
+        type: integer
+      IDCheckType:
+        type: string
+        enum: 
+          - EMAIL
+          - PHONE
+      verifiedDate:
+        type: string
+        format: date-time
+      identityCheckStatus:
+        type: string
+        enum:
+          - VERIFIED
+          - NOT-VERIFIED
+          - NONE      
+      userId:
+        type: string
+        
+  LoginUser:
+      type: object
+      properties:
+        loginUserId:
+          type: integer
+        username:
+          type: string
+        passwordHash:
+          type: string
+        salt:
+          type: string
+        userId:
+          type: string
+        lastLoggedIn:
+          type: string  
+  
+  AccessToken:
+    type: object
+    properties:
+      userId:
+        type: string
+      accessToken:
+        type: string
+      refreshToken:
+        type: string
+      
+      
+          
+  OrderStatus:
+    type: object
+    properties:
+      orderHwrn:
+        type: string
+      orderStatus: 
+        type: string
+        enum:
+          - OPEN
+          - CANCELLED
+          - SUSPENDED
+          - COMPLETED
+      reasonCd:
+        type: string
+      reasonNotes:
+        type: string  
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/OrderStatusTracker'  
+ 
+  OrderStatusTracker:
+    type: object
+    properties:
+      step:
+        type: string
+        enum:
+          - NOT STARTED
+          - ORDER PLACED
+          - AWAITING CHEF ACCEPTANCE
+          - CHEF ACCEPTED
+          - PREPARATION
+          - COOKING
+          - PACKAGING
+          - SHIPPING
+          - READY FOR DELIVERY
+          - READY FOR PICKUP
+      completedDate:
+        type: string
+        format: date-time
+      dueDate: 
+        type: string
+        format: date-time
+      startDate:
+        type: string
+        format: date-time
+      
+          
+  Order:
+    type: object
+    properties:
+      id:
+        type: integer
+      orderHwrn:
+        type: string
+        example: "0012459-1235689-154263"
+      cartId:
+        type: integer
+      wolfId:
+        type: integer
+      createdDate:
+        type: string
+        format: date-time
+      orderPlacedDate:
+        type: string
+        format: date-time
+      modifiedDate:  
+        type: string
+        format: date-time
+      status:
+        type: string
+        enum:
+          - O
+          - C
+          - D
+          - I
+          - P
+        description: 
+          O - OPEN
+          C - CANCELLED
+          D - DELETED
+          I - INPROGRESS
+          P - PARTIALLY DELIVERED
+      applyDiscount:
+        type: string
+        example: "HUNGRYCHALLENGE"
+        enum:
+          - NN
+          - FF
+          - HG
+          - BG
+          - HD
+          - AH
+          - ME
+        description:
+          NN - NONE
+          FF - FIRSTFIV
+          HG - HUNGRYCHALLENGE
+          BG - BETHECHANGE
+          HD - HAPPYDA
+          AH - AWAYFROMHOME
+          ME - MONTHEND
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItems'
+  
+  OrderItems:
+    type: object
+    properties:
+      cartItemId:
+        type: integer
+        example: "123456"
+      mealDetails:
+        $ref: '#/definitions/MealDetails'
+      isCustomChanges:
+        type: boolean
+      chefId:
+        type: integer
+      quantity:
+        type: integer
+      createdDate:
+        type: string
+        format: date-time
+      createdUser:
+        type: string
+      modifiedDate:
+        type: string
+        format: date-time
+      modifiedUser:
+        type: string  
+      scheduleDeliveryDate:
+        type: string
+        format: date
+        example: "31/03/2019"
+      actualDelivertDate:
+        type: string
+        example: "31/03/2019"
+      deliveryMethod:
+        type: string
+        enum:
+          - D
+          - P
+        description:
+          D - delivery
+          P - Pickup
+  Cart:
+    type: object
+    properties:
+      cartHWRN:
+        type: string
+        format: '{wolfId}-C{CartNum}'
+        example: '00001-C456987'
+      wolfId:
+        type: integer
+      createdDate:
+        type: string
+        format: date-time
+      modifiedDate:
+        type: string
+        format: date-time
+      wolfCartStatusCd:
+        type: string
+      wolfCartStatusDesc:
+        type: string
+      auto_deleted:
+        type: boolean
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/CartItems'
+  
+  CartItems:
+    type: object
+    properties:
+      id: 
+        type: integer
+      cartItemHWRN:
+        type: string
+      mealDetails:
+        $ref: '#/definitions/MealDetails'
+      isCustomChanges:
+        type: boolean
+      chefId:
+        type: integer
+      quantity:
+        type: integer
+      createdDate:
+        type: string
+        format: date-time
+      createdUser:
+        type: string
+      modifiedDate:
+        type: string
+        format: date-time
+      modifiedUser:
+        type: string
+      isDeleted:
+        type: boolean
+        
   Meals:
     type: object
     properties:
@@ -194,25 +652,15 @@ definitions:
     type: object
     properties:
       meal:
-        type: object
-        items:
-          $ref: '#/definitions/Meal'
+        $ref: '#/definitions/Meal'
       mealSummary:    
-        type: object
-        items:
-          $ref: '#/definitions/MealSummary'
+        $ref: '#/definitions/MealSummary'
       mealServing:
-        type: object
-        items:
-          $ref: '#/definitions/MealServing'
+        $ref: '#/definitions/MealServing'
       mealDelivery:
-        type: object
-        items:
-          $ref: '#/definitions/MealDelivery'
+        $ref: '#/definitions/MealDelivery'
       pricing:
-        type: object
-        items:
-          $ref: '#/definitions/PricingInfo'  
+        $ref: '#/definitions/PricingInfo'  
   
   PricingInfos:
     type: object
@@ -228,6 +676,8 @@ definitions:
   PricingInfo:
     type: object
     properties:
+      id:
+        type: integer
       rateCd:
         type: string
         format: string
@@ -259,8 +709,8 @@ definitions:
         format: date-time
         description: Meal Start Date
         example: 2018-06-22T00:00:00.000Z  
-      creator:
-        $ref: '#/definitions/Creator'
+      chef:
+        $ref: '#/definitions/Chef'
       tags:
         $ref: '#/definitions/MealTags'
   
@@ -273,75 +723,85 @@ definitions:
   MealTags:
     type: object
     properties:
+      id:
+        type: integer
+      mealId:
+        type: integer  
       tags:
         type: array
         items:
+          type: string
           format: string
   
   SearchCriteria:
     type: object
     properties:
       searchBy:
-        type: array
+        type: string
         items:
           format: string
       sortBy:
-        type: array
+        type: string
         items:
           format: string
-  Creator:    
+  Chef:    
     type: object
     properties:
       id:
+        type: integer
+      userId:
         type: string
       avatar:
         type: string
       rating:
-        $ref: '#/definitions/Rating'
+        $ref: '#/definitions/ChefRating'
         
       
-  Rating:
+  ChefRating:
     type: object
     properties:
+      id:
+        type: integer
       overall:
         type: number
         format: int32
       detail:
-        $ref: '#/definitions/RatingDetails'  
+        $ref: '#/definitions/ChefRatingDetails'  
   
-  RatingDetails:
+  ChefRatingDetails:
     type: object
     properties:
-      quality:
+      id:
+        type: integer
+      mealId:
+        type: integer
+      chefId:
+        type: integer
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/ChefRatingDetail'
+        
+  
+  ChefRatingDetail:
+    type: object
+    properties:
+      id:
+        type: integer
+      mealId:
+        type: integer
+      rating:
         type: number
         format: int32
         description: amount 
         example: 15.25 
-      delivery:
-        type: number
-        format: int32
-        description: amount 
-        example: 15.25 
-      quantity:
-        type: number
-        format: int32
-        description: amount 
-        example: 15.25 
-      taste:
-        type: number
-        format: int32
-        description: amount 
-        example: 15.25 
-      packing:
-        type: number
-        format: int32
-        description: amount 
-        example: 15.25  
-      misc:
-        type: number
-        format: int32
-        description: amount 
-        example: 15.25
+      ratingFactorDesc:
+        type: string
+        example: "Quantity" 
+      ratingCd:
+        type: string
+        example: "QTY" 
+            
   
   MealSummary:
     type: object
@@ -354,6 +814,10 @@ definitions:
   MealServing:
     type: object
     properties:
+      id:
+        type: integer
+      mealId:
+        type: integer  
       available:
         type: number
         format: int32
@@ -369,11 +833,19 @@ definitions:
         format: date-time
         description: Meal Order deadline Date
         example: 2018-06-22T00:00:00.000Z 
-  
+      orderClosedBy:
+        type: string
+        format: date-time
+        description: Meal Order deadline Date
+        example: 2018-06-22T00:00:00.000Z
   
   MealDelivery:
     type: object
     properties:
+      id:
+        type: integer
+      mealId:
+        type: integer  
       deliveryType:
         type: string
         format: string
@@ -388,6 +860,8 @@ definitions:
   MealItems:
     type: object
     properties:
+      mealId:
+        type: integer
       itemId:
         type: string
         description:  sdfsdf

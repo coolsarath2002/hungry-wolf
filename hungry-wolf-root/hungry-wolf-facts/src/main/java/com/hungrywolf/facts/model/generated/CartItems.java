@@ -1,25 +1,30 @@
 package com.hungrywolf.facts.model.generated;
 
-import java.time.ZonedDateTime;
 import java.util.Objects;
-
-import javax.validation.Valid;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.hungrywolf.facts.model.generated.MealDetails;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
 
 import org.springframework.validation.annotation.Validated;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import io.swagger.annotations.ApiModelProperty;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 
 /**
  * CartItems
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-11-05T23:39:32.833-08:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-11-06T19:59:08.333-08:00")
 
 public class CartItems   {
   @JsonProperty("id")
   private Integer id = null;
+
+  @JsonProperty("cartItemHWRN")
+  private String cartItemHWRN = null;
 
   @JsonProperty("mealDetails")
   private MealDetails mealDetails = null;
@@ -66,6 +71,26 @@ public class CartItems   {
 
   public void setId(Integer id) {
     this.id = id;
+  }
+
+  public CartItems cartItemHWRN(String cartItemHWRN) {
+    this.cartItemHWRN = cartItemHWRN;
+    return this;
+  }
+
+  /**
+   * Get cartItemHWRN
+   * @return cartItemHWRN
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getCartItemHWRN() {
+    return cartItemHWRN;
+  }
+
+  public void setCartItemHWRN(String cartItemHWRN) {
+    this.cartItemHWRN = cartItemHWRN;
   }
 
   public CartItems mealDetails(MealDetails mealDetails) {
@@ -262,6 +287,7 @@ public class CartItems   {
     }
     CartItems cartItems = (CartItems) o;
     return Objects.equals(this.id, cartItems.id) &&
+        Objects.equals(this.cartItemHWRN, cartItems.cartItemHWRN) &&
         Objects.equals(this.mealDetails, cartItems.mealDetails) &&
         Objects.equals(this.isCustomChanges, cartItems.isCustomChanges) &&
         Objects.equals(this.chefId, cartItems.chefId) &&
@@ -275,7 +301,7 @@ public class CartItems   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, mealDetails, isCustomChanges, chefId, quantity, createdDate, createdUser, modifiedDate, modifiedUser, isDeleted);
+    return Objects.hash(id, cartItemHWRN, mealDetails, isCustomChanges, chefId, quantity, createdDate, createdUser, modifiedDate, modifiedUser, isDeleted);
   }
 
   @Override
@@ -284,6 +310,7 @@ public class CartItems   {
     sb.append("class CartItems {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    cartItemHWRN: ").append(toIndentedString(cartItemHWRN)).append("\n");
     sb.append("    mealDetails: ").append(toIndentedString(mealDetails)).append("\n");
     sb.append("    isCustomChanges: ").append(toIndentedString(isCustomChanges)).append("\n");
     sb.append("    chefId: ").append(toIndentedString(chefId)).append("\n");

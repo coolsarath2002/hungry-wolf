@@ -486,12 +486,7 @@ definitions:
       startDate:
         type: string
         format: date-time
-      status:
-        type: string
-        enum:
-          - COMPLETED
-          - OPEN
-          - SUSPENDED
+      
           
   Order:
     type: object
@@ -501,6 +496,10 @@ definitions:
       orderHwrn:
         type: string
         example: "0012459-1235689-154263"
+      cartId:
+        type: integer
+      wolfId:
+        type: integer
       createdDate:
         type: string
         format: date-time
@@ -510,17 +509,39 @@ definitions:
       modifiedDate:  
         type: string
         format: date-time
+      status:
+        type: string
+        enum:
+          - O
+          - C
+          - D
+          - I
+          - P
+        description: 
+          O - OPEN
+          C - CANCELLED
+          D - DELETED
+          I - INPROGRESS
+          P - PARTIALLY DELIVERED
       applyDiscount:
         type: string
         example: "HUNGRYCHALLENGE"
         enum:
-          - NONE
-          - FIRSTFIV
-          - HUNGRYCHALLENGE
-          - BETHECHANGE
-          - HAPPYDA
-          - AWAYFROMHOME
-          - MONTHEND
+          - NN
+          - FF
+          - HG
+          - BG
+          - HD
+          - AH
+          - ME
+        description:
+          NN - NONE
+          FF - FIRSTFIV
+          HG - HUNGRYCHALLENGE
+          BG - BETHECHANGE
+          HD - HAPPYDA
+          AH - AWAYFROMHOME
+          ME - MONTHEND
       items:
         type: array
         items:
@@ -532,25 +553,60 @@ definitions:
       cartItemId:
         type: integer
         example: "123456"
-      scheduledDeliveryDate:
+      mealDetails:
+        $ref: '#/definitions/MealDetails'
+      isCustomChanges:
+        type: boolean
+      chefId:
+        type: integer
+      quantity:
+        type: integer
+      createdDate:
+        type: string
+        format: date-time
+      createdUser:
+        type: string
+      modifiedDate:
+        type: string
+        format: date-time
+      modifiedUser:
+        type: string  
+      scheduleDeliveryDate:
+        type: string
+        format: date
+        example: "31/03/2019"
+      actualDelivertDate:
         type: string
         example: "31/03/2019"
-      scheduledDeliveryTime:
-        type: string
-        example: "18:05:00"
       deliveryMethod:
         type: string
         enum:
-          - DELIVERY
-          - PICK-UP
-        
+          - D
+          - P
+        description:
+          D - delivery
+          P - Pickup
   Cart:
     type: object
     properties:
-      cartHWSN:
+      cartHWRN:
         type: string
         format: '{wolfId}-C{CartNum}'
         example: '00001-C456987'
+      wolfId:
+        type: integer
+      createdDate:
+        type: string
+        format: date-time
+      modifiedDate:
+        type: string
+        format: date-time
+      wolfCartStatusCd:
+        type: string
+      wolfCartStatusDesc:
+        type: string
+      auto_deleted:
+        type: boolean
       items:
         type: array
         items:
@@ -561,6 +617,8 @@ definitions:
     properties:
       id: 
         type: integer
+      cartItemHWRN:
+        type: string
       mealDetails:
         $ref: '#/definitions/MealDetails'
       isCustomChanges:

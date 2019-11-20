@@ -1,6 +1,7 @@
 package com.hungrywolf.base.db.repository;
 
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.hungrywolf.base.db.helper.Utils;
 import com.hungrywolf.base.db.mapper.MealsDetailsMapper;
 import com.hungrywolf.base.db.mapper.MealsMapper;
 import com.hungrywolf.facts.model.generated.Meal;
@@ -82,7 +84,7 @@ public class MealRepository {
 	
 	
 	public static String GET_MEAL_DETAILS_BY_ID = "select m.meal_id, m.title, m.meal_date, m.chef_id,summ.notes,summ.notes_created_date,serv.meal_date,serv.available, " + 
-			"serv.order_closed_by from public.meals m " + 
+			"serv.order_closed_by,serv.scheduled_delivery_date from public.meals m " + 
 			"join public.meal_summary summ on summ.meal_id = m.meal_id " + 
 			"join public.meal_serving serv on serv.meal_id = m.meal_id " + 
 			"where m.meal_id = :mealId";
@@ -97,18 +99,20 @@ public class MealRepository {
 			
 			Meal meal = new Meal();
 			meal.setId(rs.getInt("meal_id"));
-			//meal.setMealDate(rs.getTimestamp("meal_date") != null ? rs.getTimestamp("meal_date").toInstant().atZone(TIME_ZONE) : null);
+			meal.setMealDate(rs.getTimestamp("meal_date") != null ? rs.getTimestamp("meal_date").toInstant().atZone(TIME_ZONE) : null);
 			meal.setTitle(rs.getString("title"));
 			//meal.setChef(rs.getString("chef_id"));
 			MealTags mealTags = mealTagRepository.getMealTags(rs.getInt("meal_id"));
 			meal.setTags(mealTags);
 			mealSummary.setItems(mealItemRepository.getMealItems(mealId));
 			//Meal serving
-			
+			mealServing.mealId(rs.getInt("meal_id"));
 			mealServing.available(rs.getBigDecimal("available"))
-			.orderClosedBy(rs.getTimestamp("meal_date") != null ? rs.getTimestamp("meal_date").toInstant().atZone(TIME_ZONE) : null)
+			.orderClosedBy(rs.getTimestamp("order_closed_by") != null ? rs.getTimestamp("order_closed_by").toInstant().atZone(TIME_ZONE) : null)
+			.scheduledDeliveryDate(rs.getTimestamp("scheduled_delivery_date") != null ? rs.getTimestamp("scheduled_delivery_date").toInstant().atZone(TIME_ZONE) : null)
 			. mealDate(rs.getTimestamp("meal_date") != null ? rs.getTimestamp("meal_date").toInstant().atZone(TIME_ZONE) : null);
-			//.getTimeLeft();
+			String timeleft= Utils.calculateRemainingHoursDays(mealServing.getOrderClosedBy(), ZonedDateTime.now());
+			mealServing.setTimeLeft(timeleft);
 			PricingInfos pricingInfos = new PricingInfos();
 			pricingInfos.pricingInfo(mealPricingRepository.getWolfMealPricing(mealId));
 			
@@ -136,6 +140,16 @@ public class MealRepository {
 		return namedParameterJdbcTemplate.queryForObject(GET_MEAL_BY_ID, parameters, mealsMapper);
 	}
 	
+	
+	
+	public static String UPDATE_AVAILABLE_MEALS_QUANTITY = "update public.meal_serving set available = :quantity where meal_id = :mealId"; 
+			
+	public void updateMealAvailability(MealServing mealServing , Integer quantity) {
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("mealId", mealServing.getMealId());
+		parameters.put("quantity",  mealServing.getAvailable().intValue() - quantity.intValue());
+		namedParameterJdbcTemplate.update(UPDATE_AVAILABLE_MEALS_QUANTITY, parameters);
+	}
 	
 }
 

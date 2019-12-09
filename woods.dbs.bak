@@ -361,7 +361,7 @@
 			</fk>
 		</table>
 		<table name="order_status_lookup" >
-			<column name="wolf_order_status_cd" type="char" length="1" decimal="0" jt="1" />
+			<column name="wolf_order_status_cd" type="varchar" length="6" jt="12" />
 			<column name="wolf_order_status_desc" type="varchar" length="100" decimal="0" jt="12" />
 			<column name="created_date" type="timestamp" length="29" decimal="6" jt="93" />
 			<column name="created_by" type="varchar" length="50" decimal="0" jt="12" />
@@ -431,6 +431,13 @@
 				<fk_column name="account_type_id" pk="account_id" />
 			</fk>
 		</table>
+		<table name="wolf" >
+			<column name="wolf_id" type="integer" jt="4" mandatory="y" autoincrement="y" />
+			<column name="user_id" type="integer" jt="4" />
+			<index name="pk_wolf_wolf_id" unique="PRIMARY_KEY" >
+				<column name="wolf_id" />
+			</index>
+		</table>
 		<table name="wolf_cart" >
 			<column name="wolf_cart_id" type="integer" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
 			<column name="wolf_id" type="integer" length="10" decimal="0" jt="4" mandatory="y" />
@@ -445,6 +452,9 @@
 			</index>
 			<fk name="fk_wolf_cart_status_cd" to_schema="public" to_table="cart_status_lookup" >
 				<fk_column name="wolf_cart_status_cd" pk="wolf_cart_status_cd" />
+			</fk>
+			<fk name="fk_wolf_cart_wolf_id" to_schema="public" to_table="wolf" >
+				<fk_column name="wolf_id" pk="wolf_id" />
 			</fk>
 		</table>
 		<table name="wolf_cart_item" >
@@ -850,27 +860,24 @@ $function$
 	<connector name="woods-ind" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.2.5.jar" driver_desc="Standard" host="localhost" port="5432" instance="woods_ind" user="woods-db-user" passwd="d29sZnBhY2syMDE5" />
 	<layout name="Layout" id="Layout_4fd0f94" joined_routing="y" show_relation="columns" >
 		<comment><![CDATA[woods]]></comment>
-		<entity schema="public" name="access_token" color="F4DDBE" x="1472" y="1632" />
-		<entity schema="public" name="account" color="F4DDBE" x="1072" y="1632" />
+		<entity schema="public" name="access_token" color="F4DDBE" x="1456" y="1392" />
+		<entity schema="public" name="account" color="F4DDBE" x="1056" y="1392" />
 		<entity schema="public" name="cart_status_lookup" color="BEBEF4" x="48" y="832" />
 		<entity schema="public" name="currency_lookup" color="C7F4BE" x="2224" y="1072" />
 		<entity schema="public" name="customer_pricing_eagle_view" color="BED3F4" x="2672" y="560" />
-		<entity schema="public" name="identity_check" color="F4DDBE" x="1472" y="1344" />
-		<entity schema="public" name="identity_check_status" color="F4DDBE" x="1680" y="1344" />
-		<entity schema="public" name="identity_check_type" color="F4DDBE" x="1680" y="1600" />
-		<entity schema="public" name="login_user" color="F4DDBE" x="1264" y="1632" />
+		<entity schema="public" name="identity_check" color="F4DDBE" x="1456" y="1104" />
+		<entity schema="public" name="identity_check_status" color="F4DDBE" x="1664" y="1104" />
+		<entity schema="public" name="identity_check_type" color="F4DDBE" x="1664" y="1360" />
+		<entity schema="public" name="login_user" color="F4DDBE" x="1248" y="1392" />
 		<entity schema="public" name="meal_item" color="D1BEF4" x="560" y="80" />
 		<entity schema="public" name="meal_item_type" color="D1BEF4" x="800" y="256" />
 		<entity schema="public" name="meal_measurement_type" color="D1BEF4" x="800" y="80" />
 		<entity schema="public" name="meal_serving" color="BED3F4" x="1280" y="832" />
 		<entity schema="public" name="meal_summary" color="D1BEF4" x="560" y="256" />
 		<entity schema="public" name="meal_tags" color="BED3F4" x="1072" y="560" />
-		<entity schema="public" name="order_status_lookup" color="BEBEF4" x="576" y="1120" />
 		<entity schema="public" name="price_quote_eagle_view" color="BED3F4" x="2960" y="560" />
 		<entity schema="public" name="pricing_rate_lookup" color="C7F4BE" x="2224" y="816" />
 		<entity schema="public" name="pricing_upload_job" color="C7F4BE" x="2000" y="560" />
-		<entity schema="public" name="user" color="F4DDBE" x="1264" y="1344" />
-		<entity schema="public" name="wolf_cart" color="BEBEF4" x="320" y="560" />
 		<entity schema="public" name="wolf_cart_item" color="BEBEF4" x="576" y="560" />
 		<entity schema="public" name="wolf_order" color="BEBEF4" x="320" y="832" />
 		<entity schema="public" name="wolf_order_status" color="BEBEF4" x="576" y="864" />
@@ -886,6 +893,10 @@ $function$
 		<entity schema="public" name="chef_rating_factor" color="BED3F4" x="1744" y="816" />
 		<entity schema="public" name="chef_rating" color="BED3F4" x="1744" y="560" />
 		<entity schema="public" name="chef_rating_detail" color="BED3F4" x="1520" y="560" />
+		<entity schema="public" name="wolf_cart" color="BEBEF4" x="320" y="560" />
+		<entity schema="public" name="wolf" color="F4DDBE" x="1056" y="1120" />
+		<entity schema="public" name="user" color="F4DDBE" x="1248" y="1104" />
+		<entity schema="public" name="order_status_lookup" color="BEBEF4" x="576" y="1120" />
 		<group name="customer_pricing_eagle_view" color="ECF0F7" >
 			<entity schema="public" name="customer_pricing_eagle_view" />
 			<entity schema="public" name="price_quote_eagle_view" />
